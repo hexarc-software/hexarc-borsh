@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexarc.Borsh", "Hexarc.Borsh\Hexarc.Borsh.csproj", "{E68ED99D-F180-41B0-988E-6F66075A9ADB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexarc.Borsh.Tests", "Hexarc.Borsh.Tests\Hexarc.Borsh.Tests.csproj", "{D6A2BB3B-9CAD-48FD-B3F3-E5BE988DA1FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{E68ED99D-F180-41B0-988E-6F66075A9ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E68ED99D-F180-41B0-988E-6F66075A9ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E68ED99D-F180-41B0-988E-6F66075A9ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6A2BB3B-9CAD-48FD-B3F3-E5BE988DA1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6A2BB3B-9CAD-48FD-B3F3-E5BE988DA1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6A2BB3B-9CAD-48FD-B3F3-E5BE988DA1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6A2BB3B-9CAD-48FD-B3F3-E5BE988DA1FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

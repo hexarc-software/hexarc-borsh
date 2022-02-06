@@ -4,7 +4,7 @@ public static class BorshSerializer
 {
     public static Byte[] Serialize<TValue>(TValue value)
     {
-        throw new NotSupportedException();
+        throw new NotImplementedException();
     }
 
     public static TValue Deserialize<TValue>(Byte[] bytes)
