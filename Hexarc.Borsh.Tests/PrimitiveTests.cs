@@ -47,6 +47,14 @@ public class PrimitiveTests
         //[5, 0, 0, 0, 97, 108, 112, 104, 97, 4, 0, 0, 0, 122, 117, 108, 117]
         Console.WriteLine(buffer.WrittenMemory.ToArray().Dump(DumpStyle.CSharp));
     }
+
+    [Test]
+    public void WriteDouble()
+    {
+        var span = new Span<Byte>(new Byte[8]);
+        BinaryPrimitives.WriteDoubleLittleEndian(span, 5.0);
+        Console.WriteLine(span.ToArray().Dump(DumpStyle.CSharp));
+    }
 }
 
 public static class StringExt

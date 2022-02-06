@@ -1,4 +1,6 @@
-﻿namespace Hexarc.Borsh;
+﻿using System.Text.Json;
+
+namespace Hexarc.Borsh;
 
 public static class BorshSerializer
 {
