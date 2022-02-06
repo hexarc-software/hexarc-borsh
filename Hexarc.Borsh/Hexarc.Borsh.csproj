@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Hexarc.Borsh</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>Max Koverdyaev</Authors>
+    <Company>Hexarc Software</Company>
+    <PackageTags>Borsh;Serialization;Deserialization;Library</PackageTags>
+    <PackageProjectUrl>https://github.com/hexarc-software/hexarc-borsh</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hexarc-software/hexarc-borsh</RepositoryUrl>
+    <Description>
+      Hexarc.Borsh is a borsh serialization library for the .NET platform.
+    </Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>hexarc.png</PackageIcon>
+    <PackageIconFullPath>$(MSBuildThisFileDirectory)../hexarc.png</PackageIconFullPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(PackageIconFullPath)">
+      <PackagePath>\</PackagePath>
+      <Pack>true</Pack>
+    </None>
+  </ItemGroup>
+
+</Project>
