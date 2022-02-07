@@ -1,4 +1,4 @@
-namespace Hexarc.Borsh;
+namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class Int64Converter : BorshConverter<Int64>
 {

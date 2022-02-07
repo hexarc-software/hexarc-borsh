@@ -1,4 +1,4 @@
-namespace Hexarc.Borsh;
+namespace Hexarc.Borsh.Serialization;
 
 public abstract class BorshConverter<T>
 {

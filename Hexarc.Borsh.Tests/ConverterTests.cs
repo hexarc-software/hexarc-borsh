@@ -1,6 +1,7 @@
 using System;
 using System.Buffers;
 using NUnit.Framework;
+using Hexarc.Borsh.Serialization.Converters;
 
 namespace Hexarc.Borsh.Tests;
 

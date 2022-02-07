@@ -1,4 +1,4 @@
-namespace Hexarc.Borsh;
+namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class UInt16Converter : BorshConverter<UInt16>
 {
