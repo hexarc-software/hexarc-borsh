@@ -113,4 +113,42 @@ public class ConverterTests
         var output = writer.WrittenMemory.ToArray();
         Assert.AreEqual(target, output);
     }
+
+    [TestCase(Single.PositiveInfinity, new Byte[] { 0, 0, 128, 127 })]
+    [TestCase(1.1f, new Byte[] { 205, 204, 140, 63 })]
+    public void Single_WriteValue_ShouldNotFail(Single source, Byte[] target)
+    {
+        var converter = new SingleConverter();
+        var writer = new ArrayBufferWriter<Byte>();
+        converter.Write(writer, source);
+        var output = writer.WrittenMemory.ToArray();
+        Assert.AreEqual(target, output);
+    }
+
+    [Test]
+    public void Single_WriteNanValue_ShouldThrowArgumentException()
+    {
+        var converter = new SingleConverter();
+        var writer = new ArrayBufferWriter<Byte>();
+        Assert.Catch<ArgumentException>(() => converter.Write(writer, Single.NaN));
+    }
+
+    [TestCase(Double.PositiveInfinity, new Byte[] { 0, 0, 0, 0, 0, 0, 240, 127 })]
+    [TestCase(1.1d, new Byte[] { 154, 153, 153, 153, 153, 153, 241, 63 })]
+    public void Double_WriteValue_ShouldNotFail(Double source, Byte[] target)
+    {
+        var converter = new DoubleConverter();
+        var writer = new ArrayBufferWriter<Byte>();
+        converter.Write(writer, source);
+        var output = writer.WrittenMemory.ToArray();
+        Assert.AreEqual(target, output);
+    }
+
+    [Test]
+    public void Double_WriteNanValue_ShouldThrowArgumentException()
+    {
+        var converter = new DoubleConverter();
+        var writer = new ArrayBufferWriter<Byte>();
+        Assert.Catch<ArgumentException>(() => converter.Write(writer, Double.NaN));
+    }
 }
