@@ -2,7 +2,7 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class StringConverter : BorshConverter<String>
 {
-    public override void Write(IBufferWriter<Byte> writer, String value)
+    public override void Write(IBufferWriter<Byte> writer, String value, BorshSerializerOptions options)
     {
         const Int32 sizeByteCount = sizeof(Int32);
         var valueByteCount = Encoding.UTF8.GetByteCount(value);

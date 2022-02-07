@@ -2,7 +2,7 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class DoubleConverter : BorshConverter<Double>
 {
-    public override void Write(IBufferWriter<Byte> writer, Double value)
+    public override void Write(IBufferWriter<Byte> writer, Double value, BorshSerializerOptions options)
     {
         if (Double.IsNaN(value))
         {

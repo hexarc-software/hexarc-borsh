@@ -2,7 +2,7 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class Int16Converter : BorshConverter<Int16>
 {
-    public override void Write(IBufferWriter<Byte> writer, Int16 value)
+    public override void Write(IBufferWriter<Byte> writer, Int16 value, BorshSerializerOptions options)
     {
         const Int32 valueSizeInBytes = 2;
         var span = writer.GetSpan(valueSizeInBytes);
