@@ -9,6 +9,11 @@ public static partial class BorshSerializer
         return writer.WrittenMemory.ToArray();
     }
 
+    public static Task SerializeAsync<TValue>(Stream stream, TValue value, BorshSerializerOptions? options = null)
+    {
+        throw new NotImplementedException();
+    }
+
     public static TValue Deserialize<TValue>(Byte[] bytes)
     {
         throw new NotImplementedException();

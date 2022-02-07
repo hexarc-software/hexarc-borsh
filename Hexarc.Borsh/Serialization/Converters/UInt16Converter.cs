@@ -2,11 +2,6 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class UInt16Converter : BorshConverter<UInt16>
 {
-    public override void Write(IBufferWriter<Byte> writer, UInt16 value, BorshSerializerOptions options)
-    {
-        const Int32 valueSizeInBytes = 2;
-        var span = writer.GetSpan(valueSizeInBytes);
-        BinaryPrimitives.WriteUInt16LittleEndian(span, value);
-        writer.Advance(valueSizeInBytes);
-    }
+    public override void Write(BorshWriter writer, UInt16 value, BorshSerializerOptions options) =>
+        writer.WriteUInt16(value);
 }

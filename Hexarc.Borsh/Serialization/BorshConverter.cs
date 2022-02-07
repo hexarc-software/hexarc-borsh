@@ -5,7 +5,7 @@ public abstract class BorshConverter
     internal BorshConverter() { }
 
     internal abstract void WriteCoreAsObject(
-        ArrayBufferWriter<Byte> buffer,
+        BorshWriter writer,
         Object value,
         BorshSerializerOptions options);
 }
