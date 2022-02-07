@@ -2,7 +2,7 @@
 
 public static class BorshSerializer
 {
-    public static Byte[] Serialize<TValue>(TValue value)
+    public static Byte[] Serialize<TValue>(TValue value, BorshSerializerOptions? options = null)
     {
         throw new NotImplementedException();
     }
