@@ -1,5 +1,3 @@
-using System.Buffers;
-
 namespace Hexarc.Borsh;
 
 public sealed class BooleanConverter : BorshConverter<Boolean>

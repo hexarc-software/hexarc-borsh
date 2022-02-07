@@ -18,6 +18,39 @@ public class ConverterTests
         Assert.AreEqual(target, output);
     }
 
+    [TestCase(true, new Byte[] { 1 })]
+    [TestCase(false, new Byte[] { 0 })]
+    public void Boolean_WriteValue_ShouldNotFail(Boolean source, Byte[] target)
+    {
+        var converter = new BooleanConverter();
+        var writer = new ArrayBufferWriter<Byte>();
+        converter.Write(writer, source);
+        var output = writer.WrittenMemory.ToArray();
+        Assert.AreEqual(target, output);
+    }
+
+    [TestCase(1, new Byte[] { 1 })]
+    [TestCase(0, new Byte[] { 0 })]
+    public void Byte_WriteValue_ShouldNotFail(Byte source, Byte[] target)
+    {
+        var converter = new ByteConverter();
+        var writer = new ArrayBufferWriter<Byte>();
+        converter.Write(writer, source);
+        var output = writer.WrittenMemory.ToArray();
+        Assert.AreEqual(target, output);
+    }
+
+    [TestCase(127, new Byte[] { 127 })]
+    [TestCase(-128, new Byte[] { 128 })]
+    public void SByte_WriteValue_ShouldNotFail(SByte source, Byte[] target)
+    {
+        var converter = new SByteConverter();
+        var writer = new ArrayBufferWriter<Byte>();
+        converter.Write(writer, source);
+        var output = writer.WrittenMemory.ToArray();
+        Assert.AreEqual(target, output);
+    }
+
     [TestCase(32, new Byte[] { 32, 0 })]
     [TestCase(-512, new Byte[] { 0, 254 })]
     public void Int16_WriteValue_ShouldNotFail(Int16 source, Byte[] target)
@@ -60,11 +93,21 @@ public class ConverterTests
         Assert.AreEqual(target, output);
     }
 
-    [TestCase(true, new Byte[] { 1 })]
-    [TestCase(false, new Byte[] { 0 })]
-    public void Boolean_WriteValue_ShouldNotFail(Boolean source, Byte[] target)
+    [TestCase(32, new Byte[] { 32, 0, 0, 0, 0, 0, 0, 0 })]
+    [TestCase(-512, new Byte[] { 0, 254, 255, 255, 255, 255, 255, 255 })]
+    public void Int64_WriteValue_ShouldNotFail(Int64 source, Byte[] target)
     {
-        var converter = new BooleanConverter();
+        var converter = new Int64Converter();
+        var writer = new ArrayBufferWriter<Byte>();
+        converter.Write(writer, source);
+        var output = writer.WrittenMemory.ToArray();
+        Assert.AreEqual(target, output);
+    }
+
+    [TestCase(32u, new Byte[] { 32, 0, 0, 0, 0, 0, 0, 0 })]
+    public void UInt64_WriteValue_ShouldNotFail(UInt64 source, Byte[] target)
+    {
+        var converter = new UInt64Converter();
         var writer = new ArrayBufferWriter<Byte>();
         converter.Write(writer, source);
         var output = writer.WrittenMemory.ToArray();
