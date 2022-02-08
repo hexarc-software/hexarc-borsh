@@ -1,4 +1,5 @@
-﻿using Hexarc.Borsh.Serialization;
+﻿using System.Text.Json;
+using Hexarc.Borsh.Serialization;
 
 namespace Hexarc.Borsh;
 
@@ -21,11 +22,6 @@ public static partial class BorshSerializer
         }
 
         return output.WrittenMemory.ToArray();
-    }
-
-    public static Task SerializeAsync<TValue>(Stream stream, TValue value, BorshSerializerOptions? options = null)
-    {
-        throw new NotImplementedException();
     }
 
     public static TValue Deserialize<TValue>(Byte[] bytes)

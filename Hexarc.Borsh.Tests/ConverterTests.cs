@@ -5,6 +5,7 @@ using Hexarc.Borsh.Serialization.Metadata;
 
 namespace Hexarc.Borsh.Tests;
 
+[TestFixture]
 public class ConverterTests
 {
     [TestCase("", new Byte[] { 0, 0, 0, 0 })]
