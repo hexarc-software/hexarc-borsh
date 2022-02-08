@@ -20,7 +20,9 @@ public class EnumConverterTests
     {
         var buffer = new ArrayBufferWriter<Byte>();
         var writer = new BorshWriter(buffer);
-        var converter = new EnumConverter<TestEnum>();
+        var factory = new EnumConverterFactory();
+        var converter = (factory.CreateConverter(
+                typeof(TestEnum), new BorshSerializerOptions()) as EnumConverter<TestEnum>)!;
         converter.Write(writer, value, new BorshSerializerOptions());
         var output = buffer.WrittenMemory.ToArray();
         Assert.AreEqual(bytes, output);
