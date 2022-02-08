@@ -1,12 +1,26 @@
-﻿namespace Hexarc.Borsh;
+﻿using Hexarc.Borsh.Serialization;
+
+namespace Hexarc.Borsh;
 
 public static partial class BorshSerializer
 {
     public static Byte[] Serialize<TValue>(TValue value, BorshSerializerOptions? options = null)
     {
+        var output = new ArrayBufferWriter<Byte>();
+        var writer = new BorshWriter(output);
+
         options ??= BorshSerializerOptions.Default;
-        var writer = new ArrayBufferWriter<Byte>();
-        return writer.WrittenMemory.ToArray();
+        var converter = options.GetConverter(typeof(TValue));
+        if (converter is BorshConverter<TValue> typedConverter)
+        {
+            typedConverter.WriteCore(writer, value, options);
+        }
+        else
+        {
+            converter.WriteCoreAsObject(writer, value!, options);
+        }
+
+        return output.WrittenMemory.ToArray();
     }
 
     public static Task SerializeAsync<TValue>(Stream stream, TValue value, BorshSerializerOptions? options = null)

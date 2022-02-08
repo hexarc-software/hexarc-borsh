@@ -2,6 +2,8 @@ namespace Hexarc.Borsh.Serialization;
 
 public abstract class BorshConverter<T> : BorshConverter
 {
+    internal override Type TypeToConvert { get; } = typeof(T);
+
     public abstract void Write(
         BorshWriter writer,
         T value,
