@@ -35,7 +35,8 @@ public sealed class BorshConverterRegistry
     private static BorshConverterFactory[] PrepareBuiltInConverterFactories() =>
         new BorshConverterFactory[]
         {
-            new EnumConverterFactory()
+            new EnumConverterFactory(),
+            new IEnumerableConverterFactory()
         };
 
     private BorshSerializerOptions Options { get; }
