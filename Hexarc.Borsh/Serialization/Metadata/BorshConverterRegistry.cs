@@ -60,6 +60,7 @@ public sealed class BorshConverterRegistry
                 if (converterFactory.CanConvert(type))
                 {
                     converter = converterFactory.CreateConverter(type, this.Options);
+                    break;
                 }
             }
         }
