@@ -1,4 +1,3 @@
-using System;
 using NUnit.Framework;
 
 namespace Hexarc.Borsh.Tests;

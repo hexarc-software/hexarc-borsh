@@ -1,3 +1,5 @@
+using Hexarc.Borsh.Serialization.Converters;
+
 namespace Hexarc.Borsh.Serialization.Metadata;
 
 public sealed class BorshConverterRegistry
@@ -6,6 +8,11 @@ public sealed class BorshConverterRegistry
         _builtInConverters ??= PrepareBuiltInConverters();
 
     private static Dictionary<Type, BorshConverter>? _builtInConverters;
+
+    private static BorshConverterFactory[] BuiltInConverterFactories =>
+        _builtInConverterFactories ??= PrepareBuiltInConverterFactories();
+
+    private static BorshConverterFactory[]? _builtInConverterFactories;
 
     private static Dictionary<Type, BorshConverter> PrepareBuiltInConverters()
     {
@@ -25,9 +32,44 @@ public sealed class BorshConverterRegistry
         return converters;
     }
 
+    private static BorshConverterFactory[] PrepareBuiltInConverterFactories() =>
+        new BorshConverterFactory[]
+        {
+            new EnumConverterFactory()
+        };
+
+    private BorshSerializerOptions Options { get; }
+
+    public BorshConverterRegistry(BorshSerializerOptions options)
+    {
+        this.Options = options;
+    }
+
     public BorshConverter GetConverter(Type type)
     {
-        return BuiltInConverters[type];
+        var converter = default(BorshConverter);
+
+        if (BuiltInConverters.TryGetValue(type, out converter))
+        {
+            return converter;
+        }
+        else
+        {
+            foreach (var converterFactory in BuiltInConverterFactories)
+            {
+                if (converterFactory.CanConvert(type))
+                {
+                    converter = converterFactory.CreateConverter(type, this.Options);
+                }
+            }
+        }
+
+        if (converter is null)
+        {
+            throw new ArgumentException("Cannot find a converter for the given type", type.FullName);
+        }
+
+        return converter;
     }
 }
 

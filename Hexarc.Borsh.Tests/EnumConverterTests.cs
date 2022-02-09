@@ -1,4 +1,3 @@
-using System;
 using System.Buffers;
 using Hexarc.Borsh.Serialization.Converters;
 using NUnit.Framework;

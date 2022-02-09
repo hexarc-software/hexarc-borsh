@@ -6,6 +6,8 @@ public abstract class BorshConverter
 
     internal abstract Type TypeToConvert { get; }
 
+    public abstract Boolean CanConvert(Type type);
+
     internal abstract void WriteCoreAsObject(
         BorshWriter writer,
         Object value,

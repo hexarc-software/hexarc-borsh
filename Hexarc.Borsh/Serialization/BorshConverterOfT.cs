@@ -4,6 +4,9 @@ public abstract class BorshConverter<T> : BorshConverter
 {
     internal override Type TypeToConvert { get; } = typeof(T);
 
+    public override Boolean CanConvert(Type type) =>
+        type == typeof(T);
+
     public abstract void Write(
         BorshWriter writer,
         T value,
