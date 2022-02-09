@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Hexarc.Borsh</PackageId>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Authors>Max Koverdyaev</Authors>
     <Company>Hexarc Software</Company>
     <PackageTags>Borsh;Serialization;Deserialization;Library</PackageTags>
@@ -17,6 +17,7 @@
     <Description>
       Hexarc.Borsh is a borsh serialization library for the .NET platform.
     </Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>hexarc.png</PackageIcon>
     <PackageIconFullPath>$(MSBuildThisFileDirectory)../hexarc.png</PackageIconFullPath>
@@ -24,6 +25,10 @@
 
   <ItemGroup>
     <None Include="$(PackageIconFullPath)">
+      <PackagePath>\</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="../README.md">
       <PackagePath>\</PackagePath>
       <Pack>true</Pack>
     </None>
