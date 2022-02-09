@@ -5,19 +5,21 @@ namespace Hexarc.Borsh;
 public static partial class BorshSerializer
 {
     public static Byte[] Serialize<TValue>(TValue value, BorshSerializerOptions? options = null)
+        where TValue : notnull
     {
         var output = new ArrayBufferWriter<Byte>();
         var writer = new BorshWriter(output);
+        var type = typeof(TValue);
 
         options ??= BorshSerializerOptions.Default;
-        var converter = options.GetConverter(typeof(TValue));
+        var converter = options.GetConverter(type);
         if (converter is BorshConverter<TValue> typedConverter)
         {
             typedConverter.WriteCore(writer, value, options);
         }
         else
         {
-            converter.WriteCoreAsObject(writer, value!, options);
+            converter.WriteCoreAsObject(writer, value, options);
         }
 
         return output.WrittenMemory.ToArray();

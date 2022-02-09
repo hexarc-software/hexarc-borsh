@@ -4,11 +4,18 @@ namespace Hexarc.Borsh.Serialization.Metadata;
 
 public sealed class BorshConverterRegistry
 {
+    /// <summary>
+    /// Gets the built-in converters for primitive types.
+    /// </summary>
     private static Dictionary<Type, BorshConverter> BuiltInConverters =>
         _builtInConverters ??= PrepareBuiltInConverters();
 
     private static Dictionary<Type, BorshConverter>? _builtInConverters;
 
+    /// <summary>
+    /// Gets the built-in converter factories for the general .NET types
+    /// like enum, array-like, object-like ones.
+    /// </summary>
     private static BorshConverterFactory[] BuiltInConverterFactories =>
         _builtInConverterFactories ??= PrepareBuiltInConverterFactories();
 
@@ -36,7 +43,8 @@ public sealed class BorshConverterRegistry
         new BorshConverterFactory[]
         {
             new EnumConverterFactory(),
-            new IEnumerableConverterFactory()
+            new IEnumerableConverterFactory(),
+            new ObjectConverterFactory()
         };
 
     private BorshSerializerOptions Options { get; }

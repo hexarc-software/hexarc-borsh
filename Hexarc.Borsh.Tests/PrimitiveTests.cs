@@ -31,6 +31,7 @@ public class PrimitiveTests
             buffer.Advance(4);
             BinaryPrimitives.WriteInt32LittleEndian(span, x);
         }
+
         Console.WriteLine(buffer.WrittenMemory.ToArray().Dump(DumpStyle.CSharp));
     }
 
@@ -43,6 +44,7 @@ public class PrimitiveTests
         {
             x.WriteToBuffer(buffer);
         }
+
         //[5, 0, 0, 0, 97, 108, 112, 104, 97, 4, 0, 0, 0, 122, 117, 108, 117]
         Console.WriteLine(buffer.WrittenMemory.ToArray().Dump(DumpStyle.CSharp));
     }
