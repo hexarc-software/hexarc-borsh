@@ -1,3 +1,5 @@
+using Hexarc.Borsh.Serialization;
+
 namespace Hexarc.Borsh;
 
 public sealed class BorshWriter
@@ -115,5 +117,37 @@ public sealed class BorshWriter
         var span = this._output.GetSpan(valueByteCount);
         Encoding.UTF8.GetBytes(value, span);
         this._output.Advance(valueByteCount);
+    }
+
+    public void WriteOption<T>(
+        T? value,
+        BorshConverter<T> converter,
+        BorshSerializerOptions options) where T : class
+    {
+        if (value is null)
+        {
+            this.WriteByte(0);
+        }
+        else
+        {
+            this.WriteByte(1);
+            converter.Write(this, value, options);
+        }
+    }
+
+    public void WriteOption<T>(
+        T? value,
+        BorshConverter<T> converter,
+        BorshSerializerOptions options) where T : struct
+    {
+        if (value is null)
+        {
+            this.WriteByte(0);
+        }
+        else
+        {
+            this.WriteByte(1);
+            converter.Write(this, value.Value, options);
+        }
     }
 }

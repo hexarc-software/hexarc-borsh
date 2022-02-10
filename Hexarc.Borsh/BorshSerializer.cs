@@ -5,7 +5,6 @@ namespace Hexarc.Borsh;
 public static partial class BorshSerializer
 {
     public static Byte[] Serialize<TValue>(TValue value, BorshSerializerOptions? options = null)
-        where TValue : notnull
     {
         var output = new ArrayBufferWriter<Byte>();
         var writer = new BorshWriter(output);
