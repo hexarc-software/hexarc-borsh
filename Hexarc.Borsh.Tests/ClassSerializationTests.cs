@@ -19,6 +19,11 @@ public class ClassSerializationTests
             new Point { X = 0, Y = 0, Z = 0 },
             new Byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
         },
+        new Object[]
+        {
+            new Point { X = 5346f, Y = -245345f, Z = 2466f },
+            new Byte[] { 0, 16, 167, 69, 64, 152, 111, 200, 0, 32, 26, 69 }
+        }
     };
 
     public sealed class Point

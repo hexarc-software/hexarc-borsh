@@ -3,7 +3,7 @@ using FastMember;
 
 namespace Hexarc.Borsh.Serialization.Converters;
 
-public class ObjectDefaultConverter<T> : BorshObjectConverter<T> where T : notnull
+public class ObjectDefaultConverter<T> : BorshObjectConverter<T>
 {
     private readonly Action<BorshWriter, T>[] PropertyWriters;
 
