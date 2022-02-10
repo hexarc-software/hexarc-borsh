@@ -34,4 +34,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FastMember" Version="1.5.0" />
+  </ItemGroup>
+
 </Project>
