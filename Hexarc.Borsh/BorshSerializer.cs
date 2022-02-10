@@ -1,4 +1,5 @@
-﻿using Hexarc.Borsh.Serialization;
+﻿using System.Text.Json;
+using Hexarc.Borsh.Serialization;
 
 namespace Hexarc.Borsh;
 
