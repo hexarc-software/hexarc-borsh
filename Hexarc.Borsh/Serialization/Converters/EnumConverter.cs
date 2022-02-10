@@ -13,4 +13,9 @@ public sealed class EnumConverter<T> : BorshConverter<T> where T : struct, Enum
         }
         writer.WriteByte((Byte)position);
     }
+
+    public override T Read(ref BorshReader reader, BorshSerializerOptions options)
+    {
+        throw new NotImplementedException();
+    }
 }

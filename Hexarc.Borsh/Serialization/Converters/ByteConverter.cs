@@ -4,4 +4,9 @@ public sealed class ByteConverter : BorshConverter<Byte>
 {
     public override void Write(BorshWriter writer, Byte value, BorshSerializerOptions options) =>
         writer.WriteByte(value);
+
+    public override Byte Read(ref BorshReader reader, BorshSerializerOptions options)
+    {
+        throw new NotImplementedException();
+    }
 }

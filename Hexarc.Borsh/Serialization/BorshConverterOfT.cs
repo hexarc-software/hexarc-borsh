@@ -23,4 +23,18 @@ public abstract class BorshConverter<T> : BorshConverter
         Object value,
         BorshSerializerOptions options
     ) => this.WriteCore(writer, (T)value, options);
+
+    public abstract T Read(
+        ref BorshReader reader,
+        BorshSerializerOptions options);
+
+    internal T ReadCore(
+        ref BorshReader reader,
+        BorshSerializerOptions options
+    ) => this.Read(ref reader, options);
+
+    internal override Object? ReadCoreAsObject(
+        ref BorshReader reader,
+        BorshSerializerOptions options
+    ) => this.ReadCore(ref reader, options);
 }

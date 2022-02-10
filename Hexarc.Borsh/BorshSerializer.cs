@@ -12,6 +12,7 @@ public static partial class BorshSerializer
 
         options ??= BorshSerializerOptions.Default;
         var converter = options.GetConverter(type);
+
         if (converter is BorshConverter<TValue> typedConverter)
         {
             typedConverter.WriteCore(writer, value, options);
@@ -24,8 +25,21 @@ public static partial class BorshSerializer
         return output.WrittenMemory.ToArray();
     }
 
-    public static TValue Deserialize<TValue>(Byte[] bytes)
+    public static TValue Deserialize<TValue>(Byte[] bytes, BorshSerializerOptions? options = null)
     {
-        throw new NotImplementedException();
+        var type = typeof(TValue);
+        var reader = new BorshReader(bytes);
+
+        options ??= BorshSerializerOptions.Default;
+        var converter = options.GetConverter(type);
+
+        if (converter is BorshConverter<TValue> typedConverter)
+        {
+            return typedConverter.ReadCore(ref reader, options);
+        }
+        else
+        {
+            return (TValue)converter.ReadCoreAsObject(ref reader, options);
+        }
     }
 }

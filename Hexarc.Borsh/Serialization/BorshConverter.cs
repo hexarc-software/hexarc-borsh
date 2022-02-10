@@ -12,4 +12,8 @@ public abstract class BorshConverter
         BorshWriter writer,
         Object value,
         BorshSerializerOptions options);
+
+    internal abstract Object? ReadCoreAsObject(
+        ref BorshReader reader,
+        BorshSerializerOptions options);
 }

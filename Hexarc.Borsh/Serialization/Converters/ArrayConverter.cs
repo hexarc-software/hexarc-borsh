@@ -6,4 +6,9 @@ public sealed class ArrayConverter<TCollection, TElement> : IEnumerableDefaultCo
     {
         throw new NotImplementedException();
     }
+
+    public override TElement[] Read(ref BorshReader reader, BorshSerializerOptions options)
+    {
+        throw new NotImplementedException();
+    }
 }

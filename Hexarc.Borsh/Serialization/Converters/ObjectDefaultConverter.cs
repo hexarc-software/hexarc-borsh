@@ -36,4 +36,9 @@ public class ObjectDefaultConverter<T> : BorshObjectConverter<T>
             propertyWriter(writer, value);
         }
     }
+
+    public override T Read(ref BorshReader reader, BorshSerializerOptions options)
+    {
+        throw new NotImplementedException();
+    }
 }

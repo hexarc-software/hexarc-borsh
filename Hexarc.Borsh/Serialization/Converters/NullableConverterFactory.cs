@@ -7,6 +7,11 @@ public sealed class NullableConverterFactory : BorshConverterFactory
     public override Boolean CanConvert(Type type) =>
         type.IsGenericType && type.GetGenericTypeDefinition() == NullableType;
 
+    internal override Object? ReadCoreAsObject(ref BorshReader reader, BorshSerializerOptions options)
+    {
+        throw new NotImplementedException();
+    }
+
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var underlyingType = Nullable.GetUnderlyingType(type) ??
