@@ -35,4 +35,20 @@ public ref struct BorshReader
         this._bufferIndex += valueSizeInBytes;
         return (SByte)span[0];
     }
+
+    public Int16 ReadInt16()
+    {
+        const Int32 valueSizeInBytes = 2;
+        var span = this._buffer.Slice(_bufferIndex, valueSizeInBytes);
+        this._bufferIndex += valueSizeInBytes;
+        return BinaryPrimitives.ReadInt16LittleEndian(span);
+    }
+
+    public UInt16 ReadUInt16()
+    {
+        const Int32 valueSizeInBytes = 2;
+        var span = this._buffer.Slice(_bufferIndex, valueSizeInBytes);
+        this._bufferIndex += valueSizeInBytes;
+        return BinaryPrimitives.ReadUInt16LittleEndian(span);
+    }
 }
