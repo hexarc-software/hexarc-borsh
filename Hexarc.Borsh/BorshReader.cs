@@ -27,4 +27,12 @@ public ref struct BorshReader
         this._bufferIndex += valueSizeInBytes;
         return span[0];
     }
+
+    public SByte ReadSByte()
+    {
+        const Int32 valueSizeInBytes = 1;
+        var span = this._buffer.Slice(_bufferIndex, valueSizeInBytes);
+        this._bufferIndex += valueSizeInBytes;
+        return (SByte)span[0];
+    }
 }
