@@ -25,6 +25,13 @@ public class SerializerTests
         Assert.AreEqual(expected, result);
     }
 
+    [TestCase(new Byte[] { 12, 0, 0, 0, 240, 159, 164, 161, 240, 159, 146, 163, 240, 159, 144, 183 }, "🤡💣🐷")]
+    public void DeserializeString_ShouldMatchExpectation(Byte[] bytes, String expected)
+    {
+        var result = BorshSerializer.Deserialize<String>(bytes);
+        Assert.AreEqual(expected, result);
+    }
+
     [TestCase(new Byte[] { 1 }, true)]
     [TestCase(new Byte[] { 0 }, false)]
     public void DeserializeBoolean_ShouldMatchExpectation(Byte[] bytes, Boolean expected)

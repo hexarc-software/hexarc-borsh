@@ -48,6 +48,12 @@ public ref struct BorshReader
     public Double ReadDouble() =>
         ReadDoubleLittleEndian(this.ReadSpan(sizeof(Double)));
 
+    public String ReadString()
+    {
+        var valueByteCount = this.ReadInt32();
+        return Encoding.UTF8.GetString(this.ReadSpan(valueByteCount));
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<Byte> ReadSpan(Int32 size)
     {
