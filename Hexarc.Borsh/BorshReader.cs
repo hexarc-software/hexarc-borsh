@@ -1,5 +1,6 @@
-using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using Hexarc.Borsh.Serialization.Metadata;
+using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace Hexarc.Borsh;
 
@@ -15,39 +16,38 @@ public ref struct BorshReader
         this._bufferIndex = 0;
     }
 
-    public Boolean ReadBoolean()
-    {
-        var span = this._buffer.Slice(_bufferIndex, Constants.BooleanSize);
-        this._bufferIndex += Constants.BooleanSize;
-        return span[0] == 1;
-    }
+    public Boolean ReadBoolean() =>
+        this.ReadSpan(Constants.BooleanSize)[0] == 1;
 
-    public Byte ReadByte()
-    {
-        var span = this._buffer.Slice(_bufferIndex, Constants.ByteSize);
-        this._bufferIndex += Constants.ByteSize;
-        return span[0];
-    }
+    public Byte ReadByte() =>
+        this.ReadSpan(Constants.ByteSize)[0];
 
-    public SByte ReadSByte()
-    {
-        var span = this._buffer.Slice(_bufferIndex, Constants.SByteSize);
-        this._bufferIndex += Constants.SByteSize;
-        return (SByte)span[0];
-    }
+    public SByte ReadSByte() =>
+        (SByte)this.ReadSpan(Constants.SByteSize)[0];
 
-    public Int16 ReadInt16()
-    {
-        var span = this._buffer.Slice(_bufferIndex, Constants.Int16Size);
-        this._bufferIndex += Constants.Int16Size;
-        return BinaryPrimitives.ReadInt16LittleEndian(span);
-    }
+    public Int16 ReadInt16() =>
+        ReadInt16LittleEndian(this.ReadSpan(Constants.Int16Size));
 
-    public UInt16 ReadUInt16()
+    public UInt16 ReadUInt16() =>
+        ReadUInt16LittleEndian(this.ReadSpan(Constants.UInt16Size));
+
+    public Int32 ReadInt32() =>
+        ReadInt32LittleEndian(this.ReadSpan(Constants.Int32Size));
+
+    public UInt32 ReadUInt32() =>
+        ReadUInt32LittleEndian(this.ReadSpan(Constants.UInt32Size));
+
+    public Int64 ReadInt64() =>
+        ReadInt64LittleEndian(this.ReadSpan(Constants.Int64Size));
+
+    public UInt64 ReadUInt64() =>
+        ReadUInt64LittleEndian(this.ReadSpan(Constants.UInt64Size));
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ReadOnlySpan<Byte> ReadSpan(Int32 size)
     {
-        const Int32 valueSizeInBytes = 2;
-        var span = this._buffer.Slice(_bufferIndex, Constants.UInt16Size);
-        this._bufferIndex += Constants.UInt16Size;
-        return BinaryPrimitives.ReadUInt16LittleEndian(span);
+        var span = this._buffer.Slice(this._bufferIndex, size);
+        this._bufferIndex += size;
+        return span;
     }
 }
