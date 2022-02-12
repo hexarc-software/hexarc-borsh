@@ -1,4 +1,5 @@
 using Hexarc.Borsh.Serialization;
+using Hexarc.Borsh.Serialization.Metadata;
 
 namespace Hexarc.Borsh;
 
@@ -13,74 +14,65 @@ public sealed class BorshWriter
 
     public void WriteBoolean(Boolean value)
     {
-        const Int32 valueSizeInBytes = 1;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.BooleanSize);
         span[0] = (Byte)(value ? 1 : 0);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.BooleanSize);
     }
 
     public void WriteByte(Byte value)
     {
-        const Int32 valueSizeInBytes = 1;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.ByteSize);
         span[0] = value;
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.ByteSize);
     }
 
     public void WriteSByte(SByte value)
     {
-        const Int32 valueSizeInBytes = 1;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.SByteSize);
         span[0] = (Byte)value;
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.SByteSize);
     }
 
     public void WriteInt16(Int16 value)
     {
-        const Int32 valueSizeInBytes = 2;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.Int16Size);
         BinaryPrimitives.WriteInt16LittleEndian(span, value);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.Int16Size);
     }
 
     public void WriteUInt16(UInt16 value)
     {
-        const Int32 valueSizeInBytes = 2;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.UInt16Size);
         BinaryPrimitives.WriteUInt16LittleEndian(span, value);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.UInt16Size);
     }
 
     public void WriteInt32(Int32 value)
     {
-        const Int32 valueSizeInBytes = 4;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.Int32Size);
         BinaryPrimitives.WriteInt32LittleEndian(span, value);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.Int32Size);
     }
 
     public void WriteUInt32(UInt32 value)
     {
-        const Int32 valueSizeInBytes = 4;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.UInt32Size);
         BinaryPrimitives.WriteUInt32LittleEndian(span, value);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.UInt32Size);
     }
 
     public void WriteInt64(Int64 value)
     {
-        const Int32 valueSizeInBytes = 8;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.Int64Size);
         BinaryPrimitives.WriteInt64LittleEndian(span, value);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.Int64Size);
     }
 
     public void WriteUInt64(UInt64 value)
     {
-        const Int32 valueSizeInBytes = 8;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.UInt64Size);
         BinaryPrimitives.WriteUInt64LittleEndian(span, value);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.UInt64Size);
     }
 
     public void WriteSingle(Single value)
@@ -90,10 +82,9 @@ public sealed class BorshWriter
             throw new ArgumentException("NaN cannot be written as valid BORSH", nameof(value));
         }
 
-        const Int32 valueSizeInBytes = 4;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.SingleSize);
         BinaryPrimitives.WriteSingleLittleEndian(span, value);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.SingleSize);
     }
 
     public void WriteDouble(Double value)
@@ -103,10 +94,9 @@ public sealed class BorshWriter
             throw new ArgumentException("NaN cannot be written as valid BORSH", nameof(value));
         }
 
-        const Int32 valueSizeInBytes = 8;
-        var span = this._output.GetSpan(valueSizeInBytes);
+        var span = this._output.GetSpan(Constants.DoubleSize);
         BinaryPrimitives.WriteDoubleLittleEndian(span, value);
-        this._output.Advance(valueSizeInBytes);
+        this._output.Advance(Constants.DoubleSize);
     }
 
     public void WriteString(String value)
