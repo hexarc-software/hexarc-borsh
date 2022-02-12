@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization;
 
+/// <summary>
+/// Converts an object or value to or from BORSH.
+/// </summary>
 public abstract class BorshConverter
 {
     internal BorshConverter() { }
