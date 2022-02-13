@@ -64,22 +64,22 @@ public sealed class BorshWriter
     }
 
     public void WriteOption<T>(
-        T? value,
+        Option<T> value,
         BorshConverter<T> converter,
         BorshSerializerOptions options) where T : class
     {
-        if (value is null)
+        if (value is Some<T> some)
         {
-            this.WriteByte(0);
+            this.WriteByte(1);
+            converter.Write(this, some.Value, options);
         }
         else
         {
-            this.WriteByte(1);
-            converter.Write(this, value, options);
+            this.WriteByte(0);
         }
     }
 
-    public void WriteOption<T>(
+    public void WriteNullable<T>(
         T? value,
         BorshConverter<T> converter,
         BorshSerializerOptions options) where T : struct

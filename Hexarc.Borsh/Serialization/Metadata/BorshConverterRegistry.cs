@@ -44,6 +44,7 @@ public sealed class BorshConverterRegistry
         {
             new EnumConverterFactory(),
             new NullableConverterFactory(),
+            new OptionConverterFactory(),
             new IEnumerableConverterFactory(),
             new ObjectConverterFactory()
         };
@@ -59,11 +60,7 @@ public sealed class BorshConverterRegistry
     {
         var converter = default(BorshConverter);
 
-        if (BuiltInConverters.TryGetValue(type, out converter))
-        {
-            return converter;
-        }
-        else
+        if (!BuiltInConverters.TryGetValue(type, out converter))
         {
             foreach (var converterFactory in BuiltInConverterFactories)
             {
@@ -82,6 +79,9 @@ public sealed class BorshConverterRegistry
 
         return converter;
     }
+
+    public BorshConverter<T> GetConverter<T>() =>
+        this.GetConverter(typeof(T)) as BorshConverter<T> ?? throw new InvalidOperationException();
 }
 
 internal static class DictionaryExtensions

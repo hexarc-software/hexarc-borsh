@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Hexarc.Borsh.Serialization;
 using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace Hexarc.Borsh;
@@ -52,6 +53,22 @@ public ref struct BorshReader
     {
         var valueByteCount = this.ReadInt32();
         return Encoding.UTF8.GetString(this.ReadSpan(valueByteCount));
+    }
+
+    public Option<T> ReadOption<T>(
+        BorshConverter<T> converter,
+        BorshSerializerOptions options) where T : class
+    {
+        var @case = this.ReadByte();
+        if (@case == 0)
+        {
+            return Option<T>.None();
+        }
+        else
+        {
+            var value = converter.ReadCore(ref this, options);
+            return Option<T>.Some(value);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

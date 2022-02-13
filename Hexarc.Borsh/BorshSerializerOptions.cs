@@ -12,6 +12,9 @@ public sealed class BorshSerializerOptions
     public BorshSerializerOptions() =>
         this.ConverterRegistry = new BorshConverterRegistry(this);
 
+    internal BorshConverter<T> GetConverter<T>() =>
+        this.ConverterRegistry.GetConverter<T>();
+
     internal BorshConverter GetConverter(Type type) =>
         this.ConverterRegistry.GetConverter(type);
 }
