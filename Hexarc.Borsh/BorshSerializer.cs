@@ -1,45 +1,29 @@
-﻿using Hexarc.Borsh.Serialization;
-
-namespace Hexarc.Borsh;
+﻿namespace Hexarc.Borsh;
 
 public static partial class BorshSerializer
 {
     public static Byte[] Serialize<TValue>(TValue value, BorshSerializerOptions? options = null)
     {
+        if (value is null && !typeof(TValue).IsValueType)
+        {
+            throw new ArgumentException("BORSH does not support null reference values", nameof(value));
+        }
+
         var output = new ArrayBufferWriter<Byte>();
         var writer = new BorshWriter(output);
-        var type = typeof(TValue);
 
         options ??= BorshSerializerOptions.Default;
-        var converter = options.GetConverter(type);
-
-        if (converter is BorshConverter<TValue> typedConverter)
-        {
-            typedConverter.WriteCore(writer, value, options);
-        }
-        else
-        {
-            converter.WriteCoreAsObject(writer, value, options);
-        }
+        var converter = options.GetConverter<TValue>();
+        converter.WriteCore(writer, value, options);
 
         return output.WrittenMemory.ToArray();
     }
 
     public static TValue Deserialize<TValue>(Byte[] bytes, BorshSerializerOptions? options = null)
     {
-        var type = typeof(TValue);
         var reader = new BorshReader(bytes);
-
         options ??= BorshSerializerOptions.Default;
-        var converter = options.GetConverter(type);
-
-        if (converter is BorshConverter<TValue> typedConverter)
-        {
-            return typedConverter.ReadCore(ref reader, options);
-        }
-        else
-        {
-            return (TValue)converter.ReadCoreAsObject(ref reader, options);
-        }
+        var converter = options.GetConverter<TValue>();
+        return converter.ReadCore(ref reader, options);
     }
 }

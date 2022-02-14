@@ -45,22 +45,17 @@ public sealed class BorshConverterRegistry
             new EnumConverterFactory(),
             new NullableConverterFactory(),
             new OptionConverterFactory(),
-            new IEnumerableConverterFactory(),
             new ObjectConverterFactory()
         };
 
     private BorshSerializerOptions Options { get; }
 
-    public BorshConverterRegistry(BorshSerializerOptions options)
-    {
+    public BorshConverterRegistry(BorshSerializerOptions options) =>
         this.Options = options;
-    }
 
     public BorshConverter GetConverter(Type type)
     {
-        var converter = default(BorshConverter);
-
-        if (!BuiltInConverters.TryGetValue(type, out converter))
+        if (!BuiltInConverters.TryGetValue(type, out var converter))
         {
             foreach (var converterFactory in BuiltInConverterFactories)
             {
