@@ -20,4 +20,13 @@ public class EnumSerializationTests
         var result = BorshSerializer.Serialize(value);
         Assert.AreEqual(expected, result);
     }
+
+    [TestCase(new Byte[] { 0 }, Numbers.One)]
+    [TestCase(new Byte[] { 1 }, Numbers.Two)]
+    [TestCase(new Byte[] { 2 }, Numbers.Three)]
+    public void BasicEnumDeserialization_ShouldMatchExpectation(Byte[] bytes, Numbers expected)
+    {
+        var result = BorshSerializer.Deserialize<Numbers>(bytes);
+        Assert.AreEqual(expected, result);
+    }
 }

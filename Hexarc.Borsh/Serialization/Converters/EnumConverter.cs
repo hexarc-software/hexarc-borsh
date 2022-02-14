@@ -7,6 +7,10 @@ public sealed class EnumConverter<T> : BorshConverter<T> where T : struct, Enum
     public override void Write(BorshWriter writer, T value, BorshSerializerOptions options)
     {
         var position = Array.IndexOf(this.CachedValues, value);
+        if (position == -1)
+        {
+            throw new IndexOutOfRangeException("Given value does not belong to thr requested enum");
+        }
         if (position > Byte.MaxValue)
         {
             throw new ArgumentException("Enum value index cannot be more than Byte.MaxValue", nameof(value));
@@ -16,6 +20,7 @@ public sealed class EnumConverter<T> : BorshConverter<T> where T : struct, Enum
 
     public override T Read(ref BorshReader reader, BorshSerializerOptions options)
     {
-        throw new NotImplementedException();
+        var index = reader.ReadByte();
+        return this.CachedValues[index];
     }
 }
