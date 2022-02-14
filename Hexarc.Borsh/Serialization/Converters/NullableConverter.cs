@@ -11,8 +11,6 @@ public sealed class NullableConverter<T> : BorshConverter<T?>
     public override void Write(BorshWriter writer, T? value, BorshSerializerOptions options) =>
         writer.WriteNullable(value, this.UnderlyingConverter, options);
 
-    public override T? Read(ref BorshReader reader, BorshSerializerOptions options)
-    {
-        throw new NotImplementedException();
-    }
+    public override T? Read(ref BorshReader reader, BorshSerializerOptions options) =>
+        reader.ReadNullable(options.GetConverter<T>(), options);
 }

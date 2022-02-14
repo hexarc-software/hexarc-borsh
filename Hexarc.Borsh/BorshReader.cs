@@ -71,6 +71,21 @@ public ref struct BorshReader
         }
     }
 
+    public T? ReadNullable<T>(
+        BorshConverter<T> converter,
+        BorshSerializerOptions options) where T : struct
+    {
+        var @case = this.ReadByte();
+        if (@case == 0)
+        {
+            return default;
+        }
+        else
+        {
+            return converter.ReadCore(ref this, options);
+        }
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ReadOnlySpan<Byte> ReadSpan(Int32 size)
     {
