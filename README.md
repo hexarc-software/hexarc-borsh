@@ -31,7 +31,7 @@ public class Point
 var point = new Point() { X = 5, Y = 10, Z = 20 };
 
 var raw = BorshSerializer.Serialize(point);
-var restored = BorshSerializer.Deserialize(raw);
+var restored = BorshSerializer.Deserialize<Point>(raw);
 ```
 
 ## Features
