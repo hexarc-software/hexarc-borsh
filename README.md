@@ -5,11 +5,11 @@
 
 Hexarc.Borsh is .NET implementation of the Binary Object Representation Serializer for Hashing format.
 
-Current state: 🚧 Under development 🚧
+Current status: 🚧 Under development 🚧
 
 ## Getting started
 
-Install the package into a project with the `NuGet` cli:
+Install the package with the `NuGet` CLI:
 ```sh
 dotnet add package Hexarc.Borsh
 ```
@@ -21,7 +21,6 @@ using Hexarc.Borsh;
 
 Serialize and deserialize .NET objects via the `BorshSerializer` class:
 ```cs
-
 public class Point
 {
     public Int32 X { get; init; }
