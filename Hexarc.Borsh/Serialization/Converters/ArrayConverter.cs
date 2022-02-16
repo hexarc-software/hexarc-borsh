@@ -20,7 +20,7 @@ public sealed class ArrayConverter<T> : BorshConverter<T[]>
     {
         var length = reader.ReadInt32();
         var array = new T[length];
-        for (var i = 0; i < array.Length; i++)
+        for (var i = 0; i < length; i++)
         {
             array[i] = this.ItemConverter.Read(ref reader, options);
         }

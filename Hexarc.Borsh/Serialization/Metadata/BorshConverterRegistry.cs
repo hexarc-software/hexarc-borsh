@@ -42,9 +42,10 @@ public sealed class BorshConverterRegistry
     private static BorshConverterFactory[] PrepareBuiltInConverterFactories() =>
         new BorshConverterFactory[]
         {
+            new NullableConverterFactory(),
             new EnumConverterFactory(),
             new ArrayConverterFactory(),
-            new NullableConverterFactory(),
+            new HashConverterFactory(),
             new OptionConverterFactory(),
             new ObjectConverterFactory()
         };
