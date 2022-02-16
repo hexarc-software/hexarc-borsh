@@ -43,6 +43,7 @@ public sealed class BorshConverterRegistry
         new BorshConverterFactory[]
         {
             new EnumConverterFactory(),
+            new ArrayConverterFactory(),
             new NullableConverterFactory(),
             new OptionConverterFactory(),
             new ObjectConverterFactory()
