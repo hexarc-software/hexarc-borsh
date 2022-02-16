@@ -3,7 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/v/Hexarc.Borsh.svg)](https://www.nuget.org/packages/Hexarc.Borsh)
 [![Downloads](http://img.shields.io/nuget/dt/Hexarc.Borsh.svg)](https://www.nuget.org/packages/Hexarc.Borsh)
 
-Hexarc.Borsh is .NET implementation of the Binary Object Representation Serializer for Hashing format.
+Hexarc.Borsh is .NET implementation of the [Binary Object Representation Serializer for Hashing](https://borsh.io/) format.
 
 Current status: 🚧 Under development 🚧
 
