@@ -43,6 +43,7 @@ Limited count of the .NET types are currently supported:
 * `String`
 * Arrays as `T[]`
 * `HashSet<T>`
+* `Dictionary<TKey, TValue>`
 * `Hexarc.Borsh.Option<T>`
 * POCO like user defined classes
 

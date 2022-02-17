@@ -1,6 +1,6 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
-public sealed class HashConverterFactory : BorshConverterFactory
+public sealed class HashSetConverterFactory : BorshConverterFactory
 {
     private readonly Type HashSetType = typeof(HashSet<>);
 
@@ -11,7 +11,7 @@ public sealed class HashConverterFactory : BorshConverterFactory
     {
         var itemType = type.GetGenericArguments().First();
         var converterType = typeof(HashSetConverter<>).MakeGenericType(itemType);
-        return Activator.CreateInstance(converterType, options)  as BorshConverter ??
+        return Activator.CreateInstance(converterType, options) as BorshConverter ??
                throw new InvalidOperationException("Cannot create a converter instance");
     }
 }

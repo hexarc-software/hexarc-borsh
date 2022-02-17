@@ -45,7 +45,8 @@ public sealed class BorshConverterRegistry
             new NullableConverterFactory(),
             new EnumConverterFactory(),
             new ArrayConverterFactory(),
-            new HashConverterFactory(),
+            new HashSetConverterFactory(),
+            new DictionaryConverterFactory(),
             new OptionConverterFactory(),
             new ObjectConverterFactory()
         };
