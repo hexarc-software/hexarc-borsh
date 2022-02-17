@@ -3,16 +3,18 @@ using FastMember;
 
 namespace Hexarc.Borsh.Serialization.Converters;
 
-public class ObjectDefaultConverter<T> : BorshConverter<T> where T : notnull
+public class ObjectConverter<T> : BorshConverter<T> where T : notnull
 {
     private readonly TypeAccessor Accessor;
 
     private readonly Dictionary<String, BorshConverter> Converters;
 
-    public ObjectDefaultConverter(BorshSerializerOptions options)
+    public ObjectConverter(BorshSerializerOptions options)
     {
         var type = typeof(T);
-        var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+        var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+            .Where(p => p.GetCustomAttribute<BorshIgnoreAttribute>() is null)
+            .ToArray();
 
         this.Accessor = TypeAccessor.Create(type);
         this.Converters = Array

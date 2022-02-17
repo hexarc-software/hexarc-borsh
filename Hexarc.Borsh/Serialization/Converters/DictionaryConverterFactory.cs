@@ -5,7 +5,7 @@ public sealed class DictionaryConverterFactory : BorshConverterFactory
     private readonly Type DictionaryType = typeof(Dictionary<,>);
 
     public override Boolean CanConvert(Type type) =>
-        type.GetGenericTypeDefinition() == this.DictionaryType;
+        type.IsGenericType && type.GetGenericTypeDefinition() == this.DictionaryType;
 
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {

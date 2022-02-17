@@ -1,3 +1,4 @@
+using Hexarc.Borsh.Serialization;
 using NUnit.Framework;
 
 namespace Hexarc.Borsh.Tests;
@@ -52,6 +53,9 @@ public class ClassSerializationTests
         public Single X { get; init; }
         public Single Y { get; init; }
         public Single Z { get; init; }
+
+        [BorshIgnore]
+        public String? Memo { get; init; }
 
         public Boolean Equals(Point? other)
         {

@@ -5,7 +5,7 @@ public sealed class HashSetConverterFactory : BorshConverterFactory
     private readonly Type HashSetType = typeof(HashSet<>);
 
     public override Boolean CanConvert(Type type) =>
-        type.GetGenericTypeDefinition() == this.HashSetType;
+        type.IsGenericType && type.GetGenericTypeDefinition() == this.HashSetType;
 
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
