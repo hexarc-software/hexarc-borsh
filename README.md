@@ -52,7 +52,9 @@ All other types are not supported at the moment but already planned.
 
 Another important notice that Borsh is mostly designed to support the Rust
 type system. So `null` reference values are not supported in .NET implementation.
-Please use the special `Hexarc.Borsh.BorshOptional` attribute or `Hexarc.Borsh.Option<T>` type instead of .NET nullable reference types:
+Please use the special `Hexarc.Borsh.BorshOptional` attribute or 
+`Hexarc.Borsh.Option<T>` type.
+
 Property annotation example:
 ```cs
 public class PersonDetails
