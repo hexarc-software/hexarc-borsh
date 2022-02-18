@@ -8,6 +8,9 @@ public sealed class BorshObjectAttribute : BorshAttribute {}
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class BorshIgnoreAttribute : BorshAttribute { }
 
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class BorshOptionalAttribute : BorshAttribute { }
+
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum |
                 AttributeTargets.Parameter | AttributeTargets.Field)]
 public sealed class BorshConverterAttribute : BorshAttribute

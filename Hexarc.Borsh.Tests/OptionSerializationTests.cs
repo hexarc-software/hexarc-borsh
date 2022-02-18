@@ -1,3 +1,4 @@
+using Hexarc.Borsh.Serialization;
 using NUnit.Framework;
 
 namespace Hexarc.Borsh.Tests;
@@ -25,4 +26,34 @@ public class OptionSerializationTests
             new Byte[] { 1, 4, 0, 0, 0, 84, 101, 115, 116 }
         }
     };
+
+    [TestCaseSource(nameof(AnnotatedPersonCases))]
+    public void AnnotatedPersonSerialization_ShouldMatchExpectation(AnnotatedPerson value, Byte[] expected)
+    {
+        var result = BorshSerializer.Serialize(value);
+        Assert.AreEqual(expected, result);
+    }
+
+    private static Object[] AnnotatedPersonCases =
+    {
+        new Object[]
+        {
+            new AnnotatedPerson(),
+            new Byte[] { 0, 0 }
+        },
+        new Object[]
+        {
+            new AnnotatedPerson { FirstName = "Test", LastName = "Test" },
+            new Byte[] { 1, 4, 0, 0, 0, 84, 101, 115, 116, 1, 4, 0, 0, 0, 84, 101, 115, 116 }
+        }
+    };
+
+    public class AnnotatedPerson
+    {
+        [BorshOptional]
+        public String? FirstName { get; init; }
+
+        [BorshOptional]
+        public String? LastName { get; init; }
+    }
 }

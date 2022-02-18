@@ -71,6 +71,21 @@ public ref struct BorshReader
         }
     }
 
+    public T? ReadIndirectOption<T>(
+        BorshConverter<T> converter,
+        BorshSerializerOptions options) where T : class
+    {
+        var @case = this.ReadByte();
+        if (@case == 0)
+        {
+            return default;
+        }
+        else
+        {
+            return converter.ReadCore(ref this, options);
+        }
+    }
+
     public T? ReadNullable<T>(
         BorshConverter<T> converter,
         BorshSerializerOptions options) where T : struct

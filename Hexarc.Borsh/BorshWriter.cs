@@ -79,6 +79,22 @@ public sealed class BorshWriter
         }
     }
 
+    public void WriteIndirectOption<T>(
+        T? value,
+        BorshConverter<T> converter,
+        BorshSerializerOptions options) where T : class
+    {
+        if (value is null)
+        {
+            this.WriteByte(0);
+        }
+        else
+        {
+            this.WriteByte(1);
+            converter.Write(this, value, options);
+        }
+    }
+
     public void WriteNullable<T>(
         T? value,
         BorshConverter<T> converter,

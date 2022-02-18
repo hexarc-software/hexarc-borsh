@@ -52,22 +52,24 @@ All other types are not supported at the moment but already planned.
 
 Another important notice that Borsh is mostly designed to support the Rust
 type system. So `null` reference values are not supported in .NET implementation.
-Please use the special `Hexarc.Borsh.Option<T>` type instead of .NET nullable reference types:
-So this example:
+Please use the special `Hexarc.Borsh.BorshOptional` attribute or `Hexarc.Borsh.Option<T>` type instead of .NET nullable reference types:
+Property annotation example:
 ```cs
 public class PersonDetails
 {
+    [BorshOptional]
     public String? FirstName { get; init; }
+    
+    [BorshOptional]
     public String? LastName { get; init; }
 }
 ```
-should be rewritten as:
+In case you need to serialize a top level nullable object:
 ```cs
-public class PersonDetails
-{
-    public Option<String> FirstName { get; init; }
-    public Option<String> LastName { get; init; }
-}
+String? input = Console.ReadLine();
+
+var raw = BorshSerializer.Serialize(Option<String>.Create(input));
+var restored = BorshSerializer.Deserialize<Option<String>>(raw);
 ```
 
 ## Acknowledgments
