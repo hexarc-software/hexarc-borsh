@@ -66,7 +66,7 @@ public class PersonDetails
     public String? LastName { get; init; }
 }
 ```
-In case you need to serialize a top level nullable object:
+In case you need to serialize a top level nullable reference type object:
 ```cs
 String? input = Console.ReadLine();
 
