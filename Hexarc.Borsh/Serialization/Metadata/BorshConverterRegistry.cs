@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using Hexarc.Borsh.Serialization.Converters;
 
 namespace Hexarc.Borsh.Serialization.Metadata;
@@ -54,12 +55,19 @@ public sealed class BorshConverterRegistry
 
     private BorshSerializerOptions Options { get; }
 
+    private readonly ConcurrentDictionary<Type, BorshConverter> _cachedConverters = new();
+
     public BorshConverterRegistry(BorshSerializerOptions options) =>
         this.Options = options;
 
     public BorshConverter GetConverter(Type type)
     {
-        if (!BuiltInConverters.TryGetValue(type, out var converter))
+        if (this._cachedConverters.TryGetValue(type, out var converter))
+        {
+            return converter;
+        }
+
+        if (!BuiltInConverters.TryGetValue(type, out converter))
         {
             foreach (var converterFactory in BuiltInConverterFactories)
             {
@@ -76,6 +84,7 @@ public sealed class BorshConverterRegistry
             throw new ArgumentException("Cannot find a converter for the given type", type.FullName);
         }
 
+        this._cachedConverters.TryAdd(type, converter);
         return converter;
     }
 
