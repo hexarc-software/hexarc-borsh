@@ -2,17 +2,17 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class ListConverter<T> : BorshConverter<List<T>>
 {
-    private readonly BorshConverter<T> ItemConverter;
+    private readonly BorshConverter<T> _itemConverter;
 
     public ListConverter(BorshSerializerOptions options) =>
-        this.ItemConverter = options.GetConverter<T>();
+        this._itemConverter = options.GetConverter<T>();
 
-    public override void Write(BorshWriter writer, List<T> value, BorshSerializerOptions options)
+    public override void Write(BorshWriter writer, List<T> list, BorshSerializerOptions options)
     {
-        writer.WriteInt32(value.Count);
-        foreach (var item in value)
+        writer.WriteInt32(list.Count);
+        foreach (var item in list)
         {
-            this.ItemConverter.Write(writer, item, options);
+            this._itemConverter.Write(writer, item, options);
         }
     }
 
@@ -22,7 +22,7 @@ public sealed class ListConverter<T> : BorshConverter<List<T>>
         var list = new List<T>(count);
         for (var i = 0; i < count; i++)
         {
-            list[i] = this.ItemConverter.Read(ref reader, options);
+            list[i] = this._itemConverter.Read(ref reader, options);
         }
 
         return list;

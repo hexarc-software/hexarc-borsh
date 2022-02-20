@@ -53,12 +53,12 @@ public sealed class BorshConverterRegistry
             new ObjectConverterFactory()
         };
 
-    private BorshSerializerOptions Options { get; }
+    private readonly BorshSerializerOptions _options;
 
     private readonly ConcurrentDictionary<Type, BorshConverter> _cachedConverters = new();
 
     public BorshConverterRegistry(BorshSerializerOptions options) =>
-        this.Options = options;
+        this._options = options;
 
     public BorshConverter GetConverter(Type type)
     {
@@ -73,7 +73,7 @@ public sealed class BorshConverterRegistry
             {
                 if (converterFactory.CanConvert(type))
                 {
-                    converter = converterFactory.CreateConverter(type, this.Options);
+                    converter = converterFactory.CreateConverter(type, this._options);
                     break;
                 }
             }

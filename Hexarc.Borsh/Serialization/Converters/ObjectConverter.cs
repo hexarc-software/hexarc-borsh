@@ -5,9 +5,9 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public class ObjectConverter<T> : BorshConverter<T> where T : notnull
 {
-    private readonly TypeAccessor Accessor;
+    private readonly TypeAccessor _accessor;
 
-    private readonly Dictionary<String, BorshConverter> Converters;
+    private readonly Dictionary<String, BorshConverter> _converters;
 
     public ObjectConverter(BorshSerializerOptions options)
     {
@@ -17,26 +17,26 @@ public class ObjectConverter<T> : BorshConverter<T> where T : notnull
             .Select(BorshObjectProperty.Create)
             .ToArray();
 
-        this.Accessor = TypeAccessor.Create(type);
-        this.Converters = Array
+        this._accessor = TypeAccessor.Create(type);
+        this._converters = Array
             .ConvertAll(properties, p => (p.PropertyInfo.Name, Converter: p.ComputeConverter(options)))
             .ToDictionary(x => x.Name, x => x.Converter);
     }
 
     public override void Write(BorshWriter writer, T value, BorshSerializerOptions options)
     {
-        foreach (var (name, converter) in this.Converters)
+        foreach (var (name, converter) in this._converters)
         {
-            converter.WriteCoreAsObject(writer, this.Accessor[value, name], options);
+            converter.WriteCoreAsObject(writer, this._accessor[value, name], options);
         }
     }
 
     public override T Read(ref BorshReader reader, BorshSerializerOptions options)
     {
         var value = Activator.CreateInstance<T>();
-        foreach (var (name, converter) in this.Converters)
+        foreach (var (name, converter) in this._converters)
         {
-            this.Accessor[value, name] = converter.ReadCoreAsObject(ref reader, options);
+            this._accessor[value, name] = converter.ReadCoreAsObject(ref reader, options);
         }
 
         return value;

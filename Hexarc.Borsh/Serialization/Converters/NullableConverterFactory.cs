@@ -2,19 +2,20 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class NullableConverterFactory : BorshConverterFactory
 {
-    private static readonly Type NullableType = typeof(Nullable<>);
+    private readonly Type _nullableType = typeof(Nullable<>);
+
+    private readonly Type _nullableConverterType = typeof(NullableConverter<>);
 
     public override Boolean CanConvert(Type type) =>
-        type.IsGenericType && type.GetGenericTypeDefinition() == NullableType;
+        type.IsGenericType && type.GetGenericTypeDefinition() == this._nullableType;
 
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var underlyingType = Nullable.GetUnderlyingType(type) ??
                              throw new ArgumentException("Provided type is not Nullable<>", nameof(type));
         var underlyingConverter = options.GetConverter(underlyingType);
-        var baseConverterType = typeof(NullableConverter<>);
-        var concreteConverterType = baseConverterType.MakeGenericType(underlyingType);
-        return Activator.CreateInstance(concreteConverterType, underlyingConverter) as BorshConverter ??
+        var converterType = _nullableConverterType.MakeGenericType(underlyingType);
+        return Activator.CreateInstance(converterType, underlyingConverter) as BorshConverter ??
                throw new InvalidOperationException("Cannot create a converter instance");
     }
 }

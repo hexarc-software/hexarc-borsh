@@ -2,11 +2,11 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class EnumConverter<T> : BorshConverter<T> where T : struct, Enum
 {
-    private readonly T[] CachedValues = Enum.GetValues<T>();
+    private readonly T[] _cachedValues = Enum.GetValues<T>();
 
     public override void Write(BorshWriter writer, T value, BorshSerializerOptions options)
     {
-        var position = Array.IndexOf(this.CachedValues, value);
+        var position = Array.IndexOf(this._cachedValues, value);
         if (position == -1)
         {
             throw new IndexOutOfRangeException("Given value does not belong to thr requested enum");
@@ -21,6 +21,6 @@ public sealed class EnumConverter<T> : BorshConverter<T> where T : struct, Enum
     public override T Read(ref BorshReader reader, BorshSerializerOptions options)
     {
         var index = reader.ReadByte();
-        return this.CachedValues[index];
+        return this._cachedValues[index];
     }
 }

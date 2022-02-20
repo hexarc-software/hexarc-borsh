@@ -2,16 +2,18 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class OptionConverterFactory : BorshConverterFactory
 {
-    private readonly Type OptionBaseType = typeof(Option<>);
+    private readonly Type _optionType = typeof(Option<>);
 
-    private readonly Type OptionBaseConverter = typeof(OptionConverter<>);
+    private readonly Type _optionConverter = typeof(OptionConverter<>);
 
     public override Boolean CanConvert(Type type) =>
-        type.IsGenericType && type.GetGenericTypeDefinition() == this.OptionBaseType;
+        type.IsGenericType && type.GetGenericTypeDefinition() == this._optionType;
 
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var valueType = type.GetGenericArguments().First();
-        return (BorshConverter)Activator.CreateInstance(this.OptionBaseConverter.MakeGenericType(valueType))!;
+        var converterType = this._optionConverter.MakeGenericType(valueType);
+        return Activator.CreateInstance(converterType, options) as BorshConverter ??
+               throw new InvalidOperationException("Cannot create a converter instance");
     }
 }
