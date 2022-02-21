@@ -55,6 +55,12 @@ public ref struct BorshReader
         return Encoding.UTF8.GetString(this.ReadSpan(valueByteCount));
     }
 
+    public DateTime ReadDateTime()
+    {
+        var timestamp = this.ReadInt64();
+        return DateTimeOffset.FromUnixTimeMilliseconds(timestamp).UtcDateTime;
+    }
+
     public Option<T> ReadOption<T>(
         BorshConverter<T> converter,
         BorshSerializerOptions options) where T : class

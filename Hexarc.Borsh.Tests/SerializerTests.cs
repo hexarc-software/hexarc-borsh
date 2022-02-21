@@ -1,3 +1,4 @@
+using System.Buffers.Binary;
 using NUnit.Framework;
 
 namespace Hexarc.Borsh.Tests;
@@ -38,5 +39,17 @@ public class SerializerTests
     {
         var result = BorshSerializer.Deserialize<Boolean>(bytes);
         Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void SerializeDateTime_ShouldMatchExpectation()
+    {
+        var now = DateTime.UtcNow;
+        var expected = ((DateTimeOffset)now).ToUnixTimeMilliseconds();
+        var result = BorshSerializer.Serialize(now);
+        var bytes = new Byte[8];
+        var span = new Span<Byte>(bytes);
+        BinaryPrimitives.WriteInt64LittleEndian(span, expected);
+        Assert.AreEqual(bytes, result);
     }
 }

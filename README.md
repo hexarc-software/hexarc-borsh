@@ -41,6 +41,7 @@ Limited count of the .NET types are currently supported:
 * `Nullable<T>`
 * `Enum`
 * `String`
+* `DateTime`
 * Arrays as `T[]`
 * `List<T>`
 * `HashSet<T>`

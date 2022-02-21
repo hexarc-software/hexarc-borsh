@@ -63,6 +63,9 @@ public sealed class BorshWriter
         Encoding.UTF8.GetBytes(value, this.AllocateSpan(valueByteCount));
     }
 
+    public void WriteDateTime(DateTime value) =>
+        this.WriteInt64(((DateTimeOffset)value).ToUnixTimeMilliseconds());
+
     public void WriteOption<T>(
         Option<T> value,
         BorshConverter<T> converter,

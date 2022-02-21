@@ -39,4 +39,7 @@ public static class BorshMetadataServices
 
     public static BorshConverter<String> StringConverter => _stringConverter ??= new StringConverter();
     private static BorshConverter<String>? _stringConverter;
+
+    public static BorshConverter<DateTime> DateTimeConverter => _dateTimeConverter ??= new DateTimeConverter();
+    private static BorshConverter<DateTime>? _dateTimeConverter;
 }

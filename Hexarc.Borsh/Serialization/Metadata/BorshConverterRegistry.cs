@@ -37,6 +37,7 @@ public sealed class BorshConverterRegistry
         converters.AddConverter(BorshMetadataServices.SingleConverter);
         converters.AddConverter(BorshMetadataServices.DoubleConverter);
         converters.AddConverter(BorshMetadataServices.StringConverter);
+        converters.AddConverter(BorshMetadataServices.DateTimeConverter);
         return converters;
     }
 
