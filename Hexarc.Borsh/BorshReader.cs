@@ -43,6 +43,9 @@ public ref struct BorshReader
     public UInt64 ReadUInt64() =>
         ReadUInt64LittleEndian(this.ReadSpan(sizeof(UInt64)));
 
+    public Half ReadHalf() =>
+        ReadHalfLittleEndian(this.ReadSpan(2));
+
     public Single ReadSingle() =>
         ReadSingleLittleEndian(this.ReadSpan(sizeof(Single)));
 

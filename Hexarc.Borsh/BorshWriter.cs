@@ -38,6 +38,15 @@ public sealed class BorshWriter
     public void WriteUInt64(UInt64 value) =>
         WriteUInt64LittleEndian(this.AllocateSpan(sizeof(UInt64)), value);
 
+    public void WriteHalf(Half value)
+    {
+        if (Half.IsNaN(value))
+        {
+            throw new ArgumentException("NaN cannot be written as valid BORSH", nameof(value));
+        }
+        WriteHalfLittleEndian(this.AllocateSpan(2), value);
+    }
+
     public void WriteSingle(Single value)
     {
         if (Single.IsNaN(value))

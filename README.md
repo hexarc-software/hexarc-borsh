@@ -37,7 +37,7 @@ var restored = BorshSerializer.Deserialize<Point>(raw);
 ## Features
 Limited count of the .NET types are currently supported:
 * `Byte`, `SByte`, `Boolean`, `Int16`, `UInt16`, `Int32`, `UInt32`, `Int64`, `UInt64`
-* `Single`, `Double`
+* `Single`, `Double`, `Half`
 * `Nullable<T>`
 * `Enum`
 * `String`

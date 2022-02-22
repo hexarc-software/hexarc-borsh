@@ -31,6 +31,9 @@ public static class BorshMetadataServices
     public static BorshConverter<UInt64> UInt64Converter => _uint64Converter ??= new UInt64Converter();
     private static BorshConverter<UInt64>? _uint64Converter;
 
+    public static BorshConverter<Half> HalfConverter => _halfConverter ??= new HalfConverter();
+    private static BorshConverter<Half>? _halfConverter;
+
     public static BorshConverter<Single> SingleConverter => _singleConverter ??= new SingleConverter();
     private static BorshConverter<Single>? _singleConverter;
 

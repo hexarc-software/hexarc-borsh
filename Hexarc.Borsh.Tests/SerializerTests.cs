@@ -19,6 +19,14 @@ public class SerializerTests
         Assert.AreEqual(expected, result);
     }
 
+    [TestCase(1.0f, new Byte[] { 0b00000000, 0b00111100 })]
+    public void SerializeHalf_ShouldMatchExpectation(Single value, Byte[] expected)
+    {
+        var half = (Half)value;
+        var result = BorshSerializer.Serialize(half);
+        Assert.AreEqual(expected, result);
+    }
+
     [TestCase("🤡💣🐷", new Byte[] { 12, 0, 0, 0, 240, 159, 164, 161, 240, 159, 146, 163, 240, 159, 144, 183 })]
     public void SerializeString_ShouldMatchExpectation(String value, Byte[] expected)
     {
