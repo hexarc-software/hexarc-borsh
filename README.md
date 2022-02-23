@@ -42,6 +42,7 @@ Limited count of the .NET types are currently supported:
 * `Enum`
 * `String`
 * `DateTime`
+* `ValueTuple`
 * Arrays as `T[]`
 * `List<T>`
 * `HashSet<T>`
