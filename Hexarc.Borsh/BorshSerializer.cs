@@ -1,6 +1,6 @@
 ﻿namespace Hexarc.Borsh;
 
-public static partial class BorshSerializer
+public static class BorshSerializer
 {
     public static Byte[] Serialize<TValue>(TValue value, BorshSerializerOptions? options = null)
     {
