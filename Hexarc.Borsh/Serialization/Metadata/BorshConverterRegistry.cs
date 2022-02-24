@@ -53,6 +53,7 @@ public sealed class BorshConverterRegistry
             new HashSetConverterFactory(),
             new DictionaryConverterFactory(),
             new OptionConverterFactory(),
+            new UnionConverterFactory(),
             new ObjectConverterFactory()
         };
 

@@ -20,3 +20,17 @@ public sealed class BorshConverterAttribute : BorshAttribute
     public BorshConverterAttribute(Type converterType) =>
         this.ConverterType = converterType;
 }
+
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)]
+public sealed class BorshUnionAttribute : BorshAttribute
+{
+    public Byte Order { get; }
+
+    public Type CaseType { get; }
+
+    public BorshUnionAttribute(Byte order, Type caseType)
+    {
+        this.Order = order;
+        this.CaseType = caseType;
+    }
+}

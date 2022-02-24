@@ -76,6 +76,27 @@ var raw = BorshSerializer.Serialize(Option<String>.Create(input));
 var restored = BorshSerializer.Deserialize<Option<String>>(raw);
 ```
 
+### Union Serialization
+The `BorshUnion` attribute allows to serialize union types:
+```cs
+[BorshUnion(0, typeof(Circle))]
+[BorshUnion(1, typeof(Square))]
+public abstract class Figure {}
+
+public sealed class Circle : Figure
+{
+    public Int32 Radius { get; init; }
+}
+
+public sealed class Square : Figure
+{
+    public Int32 SideSize { get; init; }
+}
+
+Figure square = new Square { SideSize = 1 };
+var raw = BorshSerializer.Serialize(square);
+```
+
 ## Acknowledgments
 Built with JetBrains tools for [Open Source](https://jb.gg/OpenSourceSupport) projects.
 
