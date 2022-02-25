@@ -1,10 +1,13 @@
+using System.Reflection;
+
 namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class ObjectConverterFactory : BorshConverterFactory
 {
     private readonly Type _objectConverterType = typeof(ObjectConverter<>);
 
-    public override Boolean CanConvert(Type type) => true;
+    public override Boolean CanConvert(Type type) =>
+        type.GetCustomAttribute<BorshObjectAttribute>() is not null;
 
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {

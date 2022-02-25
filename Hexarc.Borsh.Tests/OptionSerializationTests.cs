@@ -48,12 +48,15 @@ public class OptionSerializationTests
         }
     };
 
+    [BorshObject]
     public class AnnotatedPerson
     {
         [BorshOptional]
+        [BorshOrder(0)]
         public String? FirstName { get; init; }
 
         [BorshOptional]
+        [BorshOrder(1)]
         public String? LastName { get; init; }
     }
 }

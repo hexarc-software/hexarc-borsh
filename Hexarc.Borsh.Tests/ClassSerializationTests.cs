@@ -48,10 +48,16 @@ public class ClassSerializationTests
         }
     };
 
+    [BorshObject]
     public sealed class Point : IEquatable<Point>
     {
+        [BorshOrder(0)]
         public Single X { get; init; }
+
+        [BorshOrder(1)]
         public Single Y { get; init; }
+
+        [BorshOrder(2)]
         public Single Z { get; init; }
 
         [BorshIgnore]

@@ -25,15 +25,20 @@ public class UnionSerializationTests
 
     [BorshUnion(0, typeof(Circle))]
     [BorshUnion(1, typeof(Square))]
+    [BorshObject]
     public abstract class Figure {}
 
+    [BorshObject]
     public sealed class Circle : Figure
     {
+        [BorshOrder(1)]
         public Int32 Radius { get; init; }
     }
 
+    [BorshObject]
     public sealed class Square : Figure
     {
+        [BorshOrder(0)]
         public Int32 SideSize { get; init; }
     }
 }

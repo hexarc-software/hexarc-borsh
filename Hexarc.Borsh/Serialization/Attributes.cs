@@ -11,6 +11,15 @@ public sealed class BorshIgnoreAttribute : BorshAttribute { }
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class BorshOptionalAttribute : BorshAttribute { }
 
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class BorshOrderAttribute : BorshAttribute
+{
+    public Byte Order { get; }
+
+    public BorshOrderAttribute(Byte order) =>
+        this.Order = order;
+}
+
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum |
                 AttributeTargets.Parameter | AttributeTargets.Field)]
 public sealed class BorshConverterAttribute : BorshAttribute

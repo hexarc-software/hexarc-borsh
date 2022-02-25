@@ -21,10 +21,16 @@ using Hexarc.Borsh;
 
 Serialize and deserialize .NET objects via the `BorshSerializer` class:
 ```cs
+[BorshObject]
 public class Point
 {
+    [BorshOrder(0)]
     public Int32 X { get; init; }
+    
+    [BorshOrder(1)]
     public Int32 Y { get; init; }
+    
+    [BorshOrder(2)]
     public Int32 Z { get; init; }
 }
 
@@ -52,6 +58,31 @@ Limited count of the .NET types are currently supported:
 
 All other types are not supported at the moment but already planned.
 
+### Object serialization
+Serializable types must be annotated with the `BorshObject` attribute. 
+The `BorshIgnore` attribute can be used to exclude properties from serialization.
+```cs
+[BorshObject]
+public class Point
+{
+    [BorshOrder(0)]
+    public Int32 X { get; init; }
+    
+    [BorshOrder(1)]
+    public Int32 Y { get; init; }
+    
+    [BorshOrder(2)]
+    public Int32 Z { get; init; }
+    
+    // This property will be exluded from serialization.
+    [BorshIgnore]
+    public String? Memo { get; init; }
+}
+
+var raw = BorshSerializer.Serialize(new Point { X = 1, Y = 2, Z = 3 });
+```
+
+### Nullable reference type serialization
 Another important notice that Borsh is mostly designed to support the Rust
 type system. So `null` reference values are not supported in .NET implementation.
 Please use the special `Hexarc.Borsh.Serialization.BorshOptionalAttribute` attribute or 
@@ -59,11 +90,14 @@ Please use the special `Hexarc.Borsh.Serialization.BorshOptionalAttribute` attri
 
 Property annotation example:
 ```cs
+[BorshObject]
 public class PersonDetails
 {
+    [BorshOrder(0)]
     [BorshOptional]
     public String? FirstName { get; init; }
-    
+
+    [BorshOrder(1)]
     [BorshOptional]
     public String? LastName { get; init; }
 }
@@ -81,15 +115,20 @@ The `BorshUnion` attribute allows to serialize union types:
 ```cs
 [BorshUnion(0, typeof(Circle))]
 [BorshUnion(1, typeof(Square))]
+[BorshObject]
 public abstract class Figure {}
 
+[BorshObject]
 public sealed class Circle : Figure
 {
+    [BorshOrder(0)]
     public Int32 Radius { get; init; }
 }
 
+[BorshObject]
 public sealed class Square : Figure
 {
+    [BorshOrder(0)]
     public Int32 SideSize { get; init; }
 }
 
