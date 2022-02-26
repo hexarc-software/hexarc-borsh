@@ -5,8 +5,6 @@
 
 Hexarc.Borsh is .NET implementation of the [Binary Object Representation Serializer for Hashing](https://borsh.io/) format.
 
-Current status: 🚧 Under development 🚧
-
 ## Getting started
 
 Install the package with the `NuGet` CLI:
@@ -24,13 +22,13 @@ Serialize and deserialize .NET objects via the `BorshSerializer` class:
 [BorshObject]
 public class Point
 {
-    [BorshOrder(0)]
+    [BorshPropertyOrder(0)]
     public Int32 X { get; init; }
     
-    [BorshOrder(1)]
+    [BorshPropertyOrder(1)]
     public Int32 Y { get; init; }
     
-    [BorshOrder(2)]
+    [BorshPropertyOrder(2)]
     public Int32 Z { get; init; }
 }
 
@@ -41,7 +39,7 @@ var restored = BorshSerializer.Deserialize<Point>(raw);
 ```
 
 ## Features
-Limited count of the .NET types are currently supported:
+These types can be serialized by default:
 * `Byte`, `SByte`, `Boolean`, `Int16`, `UInt16`, `Int32`, `UInt32`, `Int64`, `UInt64`
 * `Single`, `Double`, `Half`
 * `Nullable<T>`
@@ -56,8 +54,6 @@ Limited count of the .NET types are currently supported:
 * `Hexarc.Borsh.Option<T>`
 * POCO like user defined classes
 
-All other types are not supported at the moment but already planned.
-
 ### Object serialization
 Serializable types must be annotated with the `BorshObject` attribute. 
 The `BorshIgnore` attribute can be used to exclude properties from serialization.
@@ -65,13 +61,13 @@ The `BorshIgnore` attribute can be used to exclude properties from serialization
 [BorshObject]
 public class Point
 {
-    [BorshOrder(0)]
+    [BorshPropertyOrder(0)]
     public Int32 X { get; init; }
     
-    [BorshOrder(1)]
+    [BorshPropertyOrder(1)]
     public Int32 Y { get; init; }
     
-    [BorshOrder(2)]
+    [BorshPropertyOrder(2)]
     public Int32 Z { get; init; }
     
     // This property will be exluded from serialization.
@@ -80,6 +76,18 @@ public class Point
 }
 
 var raw = BorshSerializer.Serialize(new Point { X = 1, Y = 2, Z = 3 });
+```
+
+Records serialization:
+```cs
+[BorshObject]
+public sealed record Rect(
+    [property: BorshPropertyOrder(0)] Int32 Width,
+    [property: BorshPropertyOrder(1)] Int32 Height
+);
+
+var rect = new Rect(10, 20);
+var raw = BorshSerializer.Serialize(rect);
 ```
 
 ### Nullable reference type serialization
@@ -93,11 +101,11 @@ Property annotation example:
 [BorshObject]
 public class PersonDetails
 {
-    [BorshOrder(0)]
+    [BorshPropertyOrder(0)]
     [BorshOptional]
     public String? FirstName { get; init; }
 
-    [BorshOrder(1)]
+    [BorshPropertyOrder(1)]
     [BorshOptional]
     public String? LastName { get; init; }
 }
@@ -121,14 +129,14 @@ public abstract class Figure {}
 [BorshObject]
 public sealed class Circle : Figure
 {
-    [BorshOrder(0)]
+    [BorshPropertyOrder(0)]
     public Int32 Radius { get; init; }
 }
 
 [BorshObject]
 public sealed class Square : Figure
 {
-    [BorshOrder(0)]
+    [BorshPropertyOrder(0)]
     public Int32 SideSize { get; init; }
 }
 

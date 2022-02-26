@@ -52,11 +52,11 @@ public class OptionSerializationTests
     public class AnnotatedPerson
     {
         [BorshOptional]
-        [BorshOrder(0)]
+        [BorshPropertyOrder(0)]
         public String? FirstName { get; init; }
 
         [BorshOptional]
-        [BorshOrder(1)]
+        [BorshPropertyOrder(1)]
         public String? LastName { get; init; }
     }
 }

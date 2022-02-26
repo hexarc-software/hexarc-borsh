@@ -48,16 +48,31 @@ public class ClassSerializationTests
         }
     };
 
+    [Test]
+    public void RecordSerialize_ShouldMatchExpectation()
+    {
+        var rect = new Rect(10, 20);
+        var raw = BorshSerializer.Serialize(rect);
+        var restored = BorshSerializer.Deserialize<Rect>(raw);
+        Assert.AreEqual(rect, restored);
+    }
+
+    [BorshObject]
+    public sealed record Rect(
+        [property: BorshPropertyOrder(0)] Int32 Width,
+        [property: BorshPropertyOrder(1)] Int32 Height
+    );
+
     [BorshObject]
     public sealed class Point : IEquatable<Point>
     {
-        [BorshOrder(0)]
+        [BorshPropertyOrder(0)]
         public Single X { get; init; }
 
-        [BorshOrder(1)]
+        [BorshPropertyOrder(1)]
         public Single Y { get; init; }
 
-        [BorshOrder(2)]
+        [BorshPropertyOrder(2)]
         public Single Z { get; init; }
 
         [BorshIgnore]
