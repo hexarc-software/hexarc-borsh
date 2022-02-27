@@ -25,7 +25,7 @@ public sealed class BorshPropertyOrderAttribute : BorshAttribute
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum |
                 AttributeTargets.Parameter | AttributeTargets.Field)]
-public sealed class BorshConverterAttribute : BorshAttribute
+internal class BorshConverterAttribute : BorshAttribute
 {
     public Type ConverterType { get; }
 
