@@ -1,5 +1,9 @@
 ﻿namespace Hexarc.Borsh;
 
+/// <summary>
+/// Provides functionality to serialize objects or value types
+/// to BORSH and to deserialize BORSH into objects or value types.
+/// </summary>
 public static class BorshSerializer
 {
     /// <summary>
