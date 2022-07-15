@@ -33,9 +33,8 @@ public abstract class BorshConverter<T> : BorshConverter
         BorshSerializerOptions options
     ) => this.Read(ref reader, options);
 
-    internal override Object ReadCoreAsObject(
+    internal override Object? ReadCoreAsObject(
         ref BorshReader reader,
         BorshSerializerOptions options
-    ) => this.ReadCore(ref reader, options) ??
-         throw new InvalidOperationException("Read object cannot be null");
+    ) => this.ReadCore(ref reader, options);
 }

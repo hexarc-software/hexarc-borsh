@@ -1,5 +1,4 @@
 using System.Reflection;
-using FastMember;
 
 namespace Hexarc.Borsh.Serialization.Converters;
 
@@ -22,7 +21,7 @@ public sealed class ObjectConverter<T> : BorshConverter<T> where T : notnull
             .OrderBy(p => p.Order)
             .ToArray();
 
-        this._accessor = TypeAccessor.Create(type);
+        this._accessor = new TypeAccessor(type);
         this._orderedProperties = Array.ConvertAll(properties, p => p.Name);
         this._converters = Array
             .ConvertAll(properties, p => (p.Name, Converter: p.ComputeConverter(options)))
@@ -35,7 +34,7 @@ public sealed class ObjectConverter<T> : BorshConverter<T> where T : notnull
         foreach (var property in this._orderedProperties)
         {
             var converter = this._converters[property];
-            converter.WriteCoreAsObject(writer, this._accessor[value, property], options);
+            converter.WriteCoreAsObject(writer, this._accessor[value, property]!, options);
         }
     }
 
@@ -62,9 +61,9 @@ public sealed class ObjectConverter<T> : BorshConverter<T> where T : notnull
         return this._constructor!.Invoke<T>(properties);
     }
 
-    private Object[] ReadProperties(ref BorshReader reader, BorshSerializerOptions options)
+    private Object?[] ReadProperties(ref BorshReader reader, BorshSerializerOptions options)
     {
-        var properties = new Object[this._orderedProperties.Length];
+        var properties = new Object?[this._orderedProperties.Length];
         foreach (var property in this._orderedProperties)
         {
             var converter = this._converters[property];
@@ -82,7 +81,7 @@ internal sealed record BorshConstructor(ConstructorInfo ConstructorInfo, String[
     public Int32 this[String name] =>
         Array.FindIndex(this.Parameters, x => x.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-    public T Invoke<T>(params Object[] arguments) =>
+    public T Invoke<T>(params Object?[] arguments) =>
         (T)this.ConstructorInfo.Invoke(arguments);
 
     public static BorshConstructor? FromConstructorInfos(ConstructorInfo[] constructorInfos)

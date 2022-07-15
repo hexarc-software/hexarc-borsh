@@ -16,7 +16,7 @@ public abstract class BorshConverter
         Object value,
         BorshSerializerOptions options);
 
-    internal abstract Object ReadCoreAsObject(
+    internal abstract Object? ReadCoreAsObject(
         ref BorshReader reader,
         BorshSerializerOptions options);
 }

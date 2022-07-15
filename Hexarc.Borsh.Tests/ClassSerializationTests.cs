@@ -51,7 +51,16 @@ public class ClassSerializationTests
     [Test]
     public void RecordSerialize_ShouldMatchExpectation()
     {
-        var rect = new Rect(10, 20);
+        var rect = new Rect(10, 20, default);
+        var raw = BorshSerializer.Serialize(rect);
+        var restored = BorshSerializer.Deserialize<Rect>(raw);
+        Assert.AreEqual(rect, restored);
+    }
+    
+    [Test]
+    public void RecordSerialize_ShouldMatchExpectation2()
+    {
+        var rect = new Rect(10, 20, "Memo");
         var raw = BorshSerializer.Serialize(rect);
         var restored = BorshSerializer.Deserialize<Rect>(raw);
         Assert.AreEqual(rect, restored);
@@ -60,7 +69,8 @@ public class ClassSerializationTests
     [BorshObject]
     public sealed record Rect(
         [property: BorshPropertyOrder(0)] Int32 Width,
-        [property: BorshPropertyOrder(1)] Int32 Height
+        [property: BorshPropertyOrder(1)] Int32 Height,
+        [property: BorshPropertyOrder(2), BorshOptional] String? Memo
     );
 
     [BorshObject]
