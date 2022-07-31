@@ -38,13 +38,13 @@ public class OptionSerializationTests
     {
         new Object[]
         {
-            new AnnotatedPerson(),
-            new Byte[] { 0, 0 }
+            new AnnotatedPerson { Number = new [] { 1 } },
+            new Byte[] { 0, 0, 0, 1, 0, 0, 0 }
         },
         new Object[]
         {
-            new AnnotatedPerson { FirstName = "Test", LastName = "Test" },
-            new Byte[] { 1, 4, 0, 0, 0, 84, 101, 115, 116, 1, 4, 0, 0, 0, 84, 101, 115, 116 }
+            new AnnotatedPerson { FirstName = "Test", LastName = "Test", Code = new[] { 0, 0 }, Number = new [] { 0 } },
+            new Byte[] { 1, 4, 0, 0, 0, 84, 101, 115, 116, 1, 4, 0, 0, 0, 84, 101, 115, 116, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
         }
     };
 
@@ -58,5 +58,14 @@ public class OptionSerializationTests
         [BorshOptional]
         [BorshPropertyOrder(1)]
         public String? LastName { get; init; }
+        
+        [BorshOptional]
+        [BorshPropertyOrder(2)]
+        [BorshFixedArray(2)]
+        public Int32[]? Code { get; init; }
+
+        [BorshPropertyOrder(3)]
+        [BorshFixedArray(1)]
+        public Int32[] Number { get; init; } = default!;
     }
 }

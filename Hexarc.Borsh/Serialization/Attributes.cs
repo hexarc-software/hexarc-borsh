@@ -23,6 +23,15 @@ public sealed class BorshPropertyOrderAttribute : BorshAttribute
         this.Order = order;
 }
 
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class BorshFixedArrayAttribute : BorshAttribute
+{
+    public Int32 Length { get; }
+
+    public BorshFixedArrayAttribute(Int32 length) =>
+        this.Length = length;
+}
+
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum |
                 AttributeTargets.Parameter | AttributeTargets.Field)]
 internal class BorshConverterAttribute : BorshAttribute
