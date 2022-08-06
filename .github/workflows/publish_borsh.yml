@@ -24,9 +24,15 @@ jobs:
         if: github.event.inputs.git-ref != ''
         with:
           ref: ${{ github.event.inputs.git-ref }}
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal
       - name: Pack package
         run: |
-          dotnet pack Hexarc.Borsh/Hexarc.Borsh.csproj --output packages --configuration Release
+          dotnet pack Hexarc.Borsh/Hexarc.Borsh.csproj --output packages --configuration Release --no-restore
       - name: Publish packages
         run: |
           dotnet nuget push packages/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate

@@ -2,15 +2,16 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class ArrayConverterFactory : BorshConverterFactory
 {
-    private readonly Type _arrayConverterType = typeof(ArrayConverter<>);
+    private static readonly Type s_arrayConverterType = typeof(ArrayConverter<>);
 
+    /// <inheritdoc />
     public override Boolean CanConvert(Type type) =>
         type.IsArray;
 
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var itemType = type.GetElementType() ?? throw new ArgumentException("Array type expected", nameof(type));
-        var converterType = this._arrayConverterType.MakeGenericType(itemType);
+        var converterType = s_arrayConverterType.MakeGenericType(itemType);
         return Activator.CreateInstance(converterType, options) as BorshConverter ??
                throw new InvalidOperationException("Cannot create a converter instance");
     }

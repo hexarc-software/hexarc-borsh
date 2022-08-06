@@ -2,10 +2,11 @@ namespace Hexarc.Borsh.Serialization.Converters;
 
 public sealed class TupleConverterFactory : BorshConverterFactory
 {
-    private readonly String _tupleTypeName = typeof(ValueTuple).FullName!;
+    private static readonly String s_tupleTypeName = typeof(ValueTuple).FullName!;
 
+    /// <inheritdoc />
     public override Boolean CanConvert(Type type) =>
-        type.FullName is not null && type.FullName.StartsWith(this._tupleTypeName);
+        type.FullName is not null && type.FullName.StartsWith(s_tupleTypeName);
 
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
