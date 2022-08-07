@@ -8,6 +8,7 @@ public sealed class TupleConverterFactory : BorshConverterFactory
     public override Boolean CanConvert(Type type) =>
         type.FullName is not null && type.FullName.StartsWith(s_tupleTypeName);
 
+    /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var arguments = type.GetGenericArguments();

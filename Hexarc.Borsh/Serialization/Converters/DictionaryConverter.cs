@@ -13,6 +13,7 @@ public sealed class DictionaryConverter<TKey, TValue> : BorshConverter<Dictionar
         this._valueConverter = options.GetConverter<TValue>();
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, Dictionary<TKey, TValue> dictionary, BorshSerializerOptions options)
     {
         writer.WriteInt32(dictionary.Count);
@@ -23,6 +24,7 @@ public sealed class DictionaryConverter<TKey, TValue> : BorshConverter<Dictionar
         }
     }
 
+    /// <inheritdoc />
     public override Dictionary<TKey, TValue> Read(ref BorshReader reader, BorshSerializerOptions options)
     {
         var count = reader.ReadInt32();

@@ -4,9 +4,16 @@ public abstract class BorshConverter<T> : BorshConverter
 {
     internal override Type TypeToConvert { get; } = typeof(T);
 
+    /// <inheritdoc />
     public override Boolean CanConvert(Type type) =>
         type == typeof(T);
 
+    /// <summary>
+    /// Writes an object to a given <see cref="BorshWriter"/> target.
+    /// </summary>
+    /// <param name="writer">The writer target.</param>
+    /// <param name="value"></param>
+    /// <param name="options">The serialization options.</param>
     public abstract void Write(
         BorshWriter writer,
         T value,
@@ -24,6 +31,14 @@ public abstract class BorshConverter<T> : BorshConverter
         BorshSerializerOptions options
     ) => this.WriteCore(writer, (T)value, options);
 
+    /// <summary>
+    /// Reads an object from a given <see cref="BorshReader"/> source.
+    /// </summary>
+    /// <param name="reader">The reader source.</param>
+    /// <param name="options">The serialization options.</param>
+    /// <returns>
+    /// An object that is read from the source.
+    /// </returns>
     public abstract T Read(
         ref BorshReader reader,
         BorshSerializerOptions options);

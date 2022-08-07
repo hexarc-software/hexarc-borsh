@@ -13,6 +13,7 @@ public sealed class UnionConverterFactory : BorshConverterFactory
             : type.GetCustomAttribute<BorshObjectAttribute>() is not null &&
               type.GetCustomAttributes<BorshUnionAttribute>(false).Any();
 
+    /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         return Activator.CreateInstance(s_unionConverter.MakeGenericType(type), options) as BorshConverter ??

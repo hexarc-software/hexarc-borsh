@@ -7,9 +7,11 @@ public sealed class TupleConverter<T1> : BorshConverter<ValueTuple<T1>>
     public TupleConverter(BorshSerializerOptions options) =>
         this._value1Converter = options.GetConverter<T1>();
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, ValueTuple<T1> value, BorshSerializerOptions options) =>
         this._value1Converter.Write(writer, value.Item1, options);
 
+    /// <inheritdoc />
     public override ValueTuple<T1> Read(ref BorshReader reader, BorshSerializerOptions options) =>
         new(this._value1Converter.Read(ref reader, options));
 }
@@ -25,12 +27,14 @@ public sealed class TupleConverter<T1, T2> : BorshConverter<ValueTuple<T1, T2>>
         this._value2Converter = options.GetConverter<T2>();
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, ValueTuple<T1, T2> value, BorshSerializerOptions options)
     {
         this._value1Converter.Write(writer, value.Item1, options);
         this._value2Converter.Write(writer, value.Item2, options);
     }
 
+    /// <inheritdoc />
     public override ValueTuple<T1, T2> Read(ref BorshReader reader, BorshSerializerOptions options) =>
         new(this._value1Converter.Read(ref reader, options),
             this._value2Converter.Read(ref reader, options));
@@ -49,6 +53,7 @@ public sealed class TupleConverter<T1, T2, T3> : BorshConverter<ValueTuple<T1, T
         this._value3Converter = options.GetConverter<T3>();
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, ValueTuple<T1, T2, T3> value, BorshSerializerOptions options)
     {
         this._value1Converter.Write(writer, value.Item1, options);
@@ -56,6 +61,7 @@ public sealed class TupleConverter<T1, T2, T3> : BorshConverter<ValueTuple<T1, T
         this._value3Converter.Write(writer, value.Item3, options);
     }
 
+    /// <inheritdoc />
     public override ValueTuple<T1, T2, T3> Read(ref BorshReader reader, BorshSerializerOptions options) =>
         new(this._value1Converter.Read(ref reader, options),
             this._value2Converter.Read(ref reader, options),
@@ -77,6 +83,7 @@ public sealed class TupleConverter<T1, T2, T3, T4> : BorshConverter<ValueTuple<T
         this._value4Converter = options.GetConverter<T4>();
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, ValueTuple<T1, T2, T3, T4> value, BorshSerializerOptions options)
     {
         this._value1Converter.Write(writer, value.Item1, options);
@@ -85,6 +92,7 @@ public sealed class TupleConverter<T1, T2, T3, T4> : BorshConverter<ValueTuple<T
         this._value4Converter.Write(writer, value.Item4, options);
     }
 
+    /// <inheritdoc />
     public override ValueTuple<T1, T2, T3, T4> Read(ref BorshReader reader, BorshSerializerOptions options) =>
         new(this._value1Converter.Read(ref reader, options),
             this._value2Converter.Read(ref reader, options),
@@ -109,6 +117,7 @@ public sealed class TupleConverter<T1, T2, T3, T4, T5> : BorshConverter<ValueTup
         this._value5Converter = options.GetConverter<T5>();
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, ValueTuple<T1, T2, T3, T4, T5> value, BorshSerializerOptions options)
     {
         this._value1Converter.Write(writer, value.Item1, options);
@@ -118,6 +127,7 @@ public sealed class TupleConverter<T1, T2, T3, T4, T5> : BorshConverter<ValueTup
         this._value5Converter.Write(writer, value.Item5, options);
     }
 
+    /// <inheritdoc />
     public override ValueTuple<T1, T2, T3, T4, T5> Read(ref BorshReader reader, BorshSerializerOptions options) =>
         new(this._value1Converter.Read(ref reader, options),
             this._value2Converter.Read(ref reader, options),
@@ -145,6 +155,7 @@ public sealed class TupleConverter<T1, T2, T3, T4, T5, T6> : BorshConverter<Valu
         this._value6Converter = options.GetConverter<T6>();
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, ValueTuple<T1, T2, T3, T4, T5, T6> value, BorshSerializerOptions options)
     {
         this._value1Converter.Write(writer, value.Item1, options);
@@ -155,6 +166,7 @@ public sealed class TupleConverter<T1, T2, T3, T4, T5, T6> : BorshConverter<Valu
         this._value6Converter.Write(writer, value.Item6, options);
     }
 
+    /// <inheritdoc />
     public override ValueTuple<T1, T2, T3, T4, T5, T6> Read(ref BorshReader reader, BorshSerializerOptions options) =>
         new(this._value1Converter.Read(ref reader, options),
             this._value2Converter.Read(ref reader, options),
@@ -185,6 +197,7 @@ public sealed class TupleConverter<T1, T2, T3, T4, T5, T6, T7> : BorshConverter<
         this._value7Converter = options.GetConverter<T7>();
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, ValueTuple<T1, T2, T3, T4, T5, T6, T7> value, BorshSerializerOptions options)
     {
         this._value1Converter.Write(writer, value.Item1, options);
@@ -196,6 +209,7 @@ public sealed class TupleConverter<T1, T2, T3, T4, T5, T6, T7> : BorshConverter<
         this._value7Converter.Write(writer, value.Item7, options);
     }
 
+    /// <inheritdoc />
     public override ValueTuple<T1, T2, T3, T4, T5, T6, T7> Read(ref BorshReader reader, BorshSerializerOptions options) =>
         new(this._value1Converter.Read(ref reader, options),
             this._value2Converter.Read(ref reader, options),
@@ -230,6 +244,7 @@ public sealed class TupleConverter<T1, T2, T3, T4, T5, T6, T7, TRest> : BorshCon
         this._restValueConverter = options.GetConverter<TRest>();
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> value, BorshSerializerOptions options)
     {
         this._value1Converter.Write(writer, value.Item1, options);
@@ -242,6 +257,7 @@ public sealed class TupleConverter<T1, T2, T3, T4, T5, T6, T7, TRest> : BorshCon
         this._restValueConverter.Write(writer, value.Rest, options);
     }
 
+    /// <inheritdoc />
     public override ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> Read(ref BorshReader reader, BorshSerializerOptions options) =>
         new(this._value1Converter.Read(ref reader, options),
             this._value2Converter.Read(ref reader, options),

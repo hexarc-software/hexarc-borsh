@@ -10,6 +10,7 @@ public sealed class DictionaryConverterFactory : BorshConverterFactory
     public override Boolean CanConvert(Type type) =>
         type.IsGenericType && type.GetGenericTypeDefinition() == s_dictionaryType;
 
+    /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var genericArguments = type.GetGenericArguments();

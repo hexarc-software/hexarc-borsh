@@ -10,6 +10,7 @@ public sealed class HashSetConverterFactory : BorshConverterFactory
     public override Boolean CanConvert(Type type) =>
         type.IsGenericType && type.GetGenericTypeDefinition() == s_hashSetType;
 
+    /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var itemType = type.GetGenericArguments().First();

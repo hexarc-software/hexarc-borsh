@@ -4,6 +4,7 @@ public sealed class EnumConverter<T> : BorshConverter<T> where T : struct, Enum
 {
     private readonly T[] _cachedValues = Enum.GetValues<T>();
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, T value, BorshSerializerOptions options)
     {
         var position = Array.IndexOf(this._cachedValues, value);
@@ -18,6 +19,7 @@ public sealed class EnumConverter<T> : BorshConverter<T> where T : struct, Enum
         writer.WriteByte((Byte)position);
     }
 
+    /// <inheritdoc />
     public override T Read(ref BorshReader reader, BorshSerializerOptions options)
     {
         var index = reader.ReadByte();

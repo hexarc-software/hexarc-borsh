@@ -18,6 +18,7 @@ public sealed class UnionConverter<T> : BorshConverter<T> where T : class
                 x => options.GetConverter(x.Key) ?? throw new InvalidOperationException());
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, T value, BorshSerializerOptions options)
     {
         var type = value.GetType();
@@ -26,6 +27,7 @@ public sealed class UnionConverter<T> : BorshConverter<T> where T : class
         this._caseConverters[order].WriteCoreAsObject(writer, value, options);
     }
 
+    /// <inheritdoc />
     public override T Read(ref BorshReader reader, BorshSerializerOptions options)
     {
         var key = reader.ReadByte();

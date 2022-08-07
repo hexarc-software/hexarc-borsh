@@ -10,6 +10,7 @@ public sealed class OptionConverterFactory : BorshConverterFactory
     public override Boolean CanConvert(Type type) =>
         type.IsGenericType && type.GetGenericTypeDefinition() == this.s_optionType;
 
+    /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var valueType = type.GetGenericArguments().First();

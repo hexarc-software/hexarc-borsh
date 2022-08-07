@@ -7,6 +7,7 @@ public sealed class HashSetConverter<T> : BorshConverter<HashSet<T>>
     public HashSetConverter(BorshSerializerOptions options) =>
         this._itemConverter = options.GetConverter<T>();
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, HashSet<T> hashSet, BorshSerializerOptions options)
     {
         writer.WriteInt32(hashSet.Count);
@@ -16,6 +17,7 @@ public sealed class HashSetConverter<T> : BorshConverter<HashSet<T>>
         }
     }
 
+    /// <inheritdoc />
     public override HashSet<T> Read(ref BorshReader reader, BorshSerializerOptions options)
     {
         var count = reader.ReadInt32();

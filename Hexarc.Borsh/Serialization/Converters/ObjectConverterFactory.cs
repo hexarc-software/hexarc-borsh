@@ -10,6 +10,7 @@ public sealed class ObjectConverterFactory : BorshConverterFactory
     public override Boolean CanConvert(Type type) =>
         type.GetCustomAttribute<BorshObjectAttribute>() is not null;
 
+    /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var converterType = s_objectConverterType.MakeGenericType(type);

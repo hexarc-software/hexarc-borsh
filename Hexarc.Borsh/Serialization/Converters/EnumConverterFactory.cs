@@ -7,6 +7,7 @@ public sealed class EnumConverterFactory : BorshConverterFactory
     /// <inheritdoc />
     public override Boolean CanConvert(Type type) => type.IsEnum;
 
+    /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var converterType = s_enumConverterType.MakeGenericType(type);

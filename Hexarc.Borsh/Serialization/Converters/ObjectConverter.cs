@@ -29,6 +29,7 @@ public sealed class ObjectConverter<T> : BorshConverter<T> where T : notnull
         this._constructor = BorshConstructor.FromConstructorInfos(type.GetConstructors());
     }
 
+    /// <inheritdoc />
     public override void Write(BorshWriter writer, T value, BorshSerializerOptions options)
     {
         foreach (var property in this._orderedProperties)
@@ -38,6 +39,7 @@ public sealed class ObjectConverter<T> : BorshConverter<T> where T : notnull
         }
     }
 
+    /// <inheritdoc />
     public override T Read(ref BorshReader reader, BorshSerializerOptions options) =>
         this._constructor is null
             ? this.ReadViaProperties(ref reader, options)

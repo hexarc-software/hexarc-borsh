@@ -8,6 +8,7 @@ public sealed class ArrayConverterFactory : BorshConverterFactory
     public override Boolean CanConvert(Type type) =>
         type.IsArray;
 
+    /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)
     {
         var itemType = type.GetElementType() ?? throw new ArgumentException("Array type expected", nameof(type));
