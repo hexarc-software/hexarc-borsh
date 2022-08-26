@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="Half"/> primitives.
+/// </summary>
 public sealed class HalfConverter : BorshConverter<Half>
 {
     /// <inheritdoc />

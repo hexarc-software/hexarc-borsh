@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="String"/> objects.
+/// </summary>
 public sealed class StringConverter : BorshConverter<String>
 {
     /// <inheritdoc />

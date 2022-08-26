@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization;
 
+/// <summary>
+/// Serves as the base class for all BORSH serialization attributes.
+/// </summary>
 public abstract class BorshAttribute : Attribute {}
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]

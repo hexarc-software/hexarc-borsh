@@ -22,24 +22,28 @@ public ref struct BorshReader
     public Byte ReadByte() =>
         this.ReadSpan(sizeof(Byte))[0];
 
+    [CLSCompliant(false)]
     public SByte ReadSByte() =>
         (SByte)this.ReadSpan(sizeof(SByte))[0];
 
     public Int16 ReadInt16() =>
         ReadInt16LittleEndian(this.ReadSpan(sizeof(Int16)));
 
+    [CLSCompliant(false)]
     public UInt16 ReadUInt16() =>
         ReadUInt16LittleEndian(this.ReadSpan(sizeof(UInt16)));
 
     public Int32 ReadInt32() =>
         ReadInt32LittleEndian(this.ReadSpan(sizeof(Int32)));
 
+    [CLSCompliant(false)]
     public UInt32 ReadUInt32() =>
         ReadUInt32LittleEndian(this.ReadSpan(sizeof(UInt32)));
 
     public Int64 ReadInt64() =>
         ReadInt64LittleEndian(this.ReadSpan(sizeof(Int64)));
 
+    [CLSCompliant(false)]
     public UInt64 ReadUInt64() =>
         ReadUInt64LittleEndian(this.ReadSpan(sizeof(UInt64)));
 

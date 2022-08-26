@@ -1,5 +1,9 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="SByte"/> primitives.
+/// </summary>
+[CLSCompliant(false)]
 public sealed class SByteConverter : BorshConverter<SByte>
 {
     /// <inheritdoc />

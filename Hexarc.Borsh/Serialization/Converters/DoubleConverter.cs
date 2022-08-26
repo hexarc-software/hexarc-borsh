@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="Double"/> primitives.
+/// </summary>
 public sealed class DoubleConverter : BorshConverter<Double>
 {
     /// <inheritdoc />

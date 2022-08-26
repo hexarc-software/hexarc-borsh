@@ -5,6 +5,11 @@
 
 Hexarc.Borsh is .NET implementation of the [Binary Object Representation Serializer for Hashing](https://borsh.io/) format.
 
+### Features:
+* 100% C# library
+* Zero dependencies
+* Ready for Blazor WebAssembly
+
 ## Getting started
 
 Install the package with the `NuGet` CLI:
@@ -150,4 +155,4 @@ Built with JetBrains tools for [Open Source](https://jb.gg/OpenSourceSupport) pr
 ![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
 
 ## License
-MIT © [Max Koverdyaev](https://github.com/shadeglare)
+MIT © [Hexarc Software and its contributors](https://github.com/hexarc-software)

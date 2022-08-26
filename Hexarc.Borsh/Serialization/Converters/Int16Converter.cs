@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="Int16"/> primitives.
+/// </summary>
 public sealed class Int16Converter : BorshConverter<Int16>
 {
     /// <inheritdoc />

@@ -1,5 +1,9 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="UInt32"/> primitives.
+/// </summary>
+[CLSCompliant(false)]
 public sealed class UInt32Converter : BorshConverter<UInt32>
 {
     /// <inheritdoc />

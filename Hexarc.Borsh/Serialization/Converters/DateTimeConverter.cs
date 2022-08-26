@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="DateTime"/> objects.
+/// </summary>
 public sealed class DateTimeConverter : BorshConverter<DateTime>
 {
     /// <inheritdoc />
