@@ -3,6 +3,10 @@ using Hexarc.Borsh.Serialization.Converters;
 
 namespace Hexarc.Borsh.Serialization.Metadata;
 
+/// <summary>
+/// This class provides an ability for storing and inquiring
+/// converters that are used during serialization/deserialization.
+/// </summary>
 public sealed class BorshConverterRegistry
 {
     /// <summary>
@@ -61,9 +65,21 @@ public sealed class BorshConverterRegistry
 
     private readonly ConcurrentDictionary<Type, BorshConverter> _cachedConverters = new();
 
+    /// <summary>
+    /// Creates an instance of the <see cref="BorshConverterRegistry"/> class.
+    /// </summary>
+    /// <param name="options">The serialization options used for converters.</param>
     public BorshConverterRegistry(BorshSerializerOptions options) =>
         this._options = options;
 
+    /// <summary>
+    /// Retrieves the converter for a requested type.
+    /// </summary>
+    /// <param name="type">The type to find the converter for.</param>
+    /// <returns>The found converter for the requested type.</returns>
+    /// <exception cref="ArgumentException">
+    /// Throws if no converter found.
+    /// </exception>
     public BorshConverter GetConverter(Type type)
     {
         if (this._cachedConverters.TryGetValue(type, out var converter))
@@ -92,6 +108,14 @@ public sealed class BorshConverterRegistry
         return converter;
     }
 
+    /// <summary>
+    /// Retrieves the converter for a requested type.
+    /// </summary>
+    /// <typeparam name="T">The type to find the converter for.</typeparam>
+    /// <returns>The found converter for the requested type.</returns>
+    /// <exception cref="InvalidOperationException">
+    /// Throws if the found converter can not be casted to the generalized BORSH converter class.
+    /// </exception>
     public BorshConverter<T> GetConverter<T>() =>
         this.GetConverter(typeof(T)) as BorshConverter<T> ?? throw new InvalidOperationException();
 }

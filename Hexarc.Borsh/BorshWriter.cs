@@ -5,7 +5,7 @@ using static System.Buffers.Binary.BinaryPrimitives;
 namespace Hexarc.Borsh;
 
 /// <summary>
-/// Providers a API for writing BORSH-compatible primitives.
+/// Providers an API for writing BORSH-compatible primitives.
 /// </summary>
 public sealed class BorshWriter
 {
@@ -166,7 +166,7 @@ public sealed class BorshWriter
     }
 
     /// <summary>
-    /// Writes a <see cref="Option{T}"/> value into the buffer in an indirect operations.
+    /// Writes a <see cref="Option{T}"/> value into the buffer in indirect operations.
     /// </summary>
     /// <param name="value">The the optional value to write.</param>
     /// <param name="converter">The converter for the underlying option value.</param>

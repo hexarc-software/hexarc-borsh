@@ -5,12 +5,21 @@ namespace Hexarc.Borsh.Serialization;
 /// </summary>
 public abstract class BorshAttribute : Attribute {}
 
+/// <summary>
+/// Marks a struct or class suitable from being serialized or deserialized.
+/// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 public sealed class BorshObjectAttribute : BorshAttribute {}
 
+/// <summary>
+/// Prevents a property from being serialized or deserialized.
+/// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class BorshIgnoreAttribute : BorshAttribute { }
 
+/// <summary>
+/// Marks a property as BORSH-optional.
+/// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class BorshOptionalAttribute : BorshAttribute { }
 
