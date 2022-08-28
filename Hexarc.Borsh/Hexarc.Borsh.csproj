@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -9,10 +8,10 @@
 
   <PropertyGroup>
     <PackageId>Hexarc.Borsh</PackageId>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <Authors>Max Koverdyaev</Authors>
     <Company>Hexarc Software</Company>
-    <PackageTags>Borsh;Serialization;Deserialization;Library</PackageTags>
+    <PackageTags>Borsh;Serialization;Deserialization;Library;Solana,Near</PackageTags>
     <PackageProjectUrl>https://github.com/hexarc-software/hexarc-borsh</PackageProjectUrl>
     <RepositoryUrl>https://github.com/hexarc-software/hexarc-borsh</RepositoryUrl>
     <Description>

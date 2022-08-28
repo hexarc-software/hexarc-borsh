@@ -1,9 +1,16 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for arrays of a specified type.
+/// </summary>
 public sealed class ArrayConverter<T> : BorshConverter<T[]>
 {
     private readonly BorshConverter<T> _itemConverter;
 
+    /// <summary>
+    /// Creates an instance of the <see cref="ArrayConverter{T}"/> class.
+    /// </summary>
+    /// <param name="options">The serialization options.</param>
     public ArrayConverter(BorshSerializerOptions options) =>
         this._itemConverter = options.GetConverter<T>();
 

@@ -16,7 +16,9 @@ public ref struct BorshReader
     /// <summary>
     /// Creates an instance of the <see cref="BorshReader"/> class.
     /// </summary>
-    /// <param name="borshData"></param>
+    /// <param name="borshData">
+    /// The buffer to read from.
+    /// </param>
     public BorshReader(ReadOnlySpan<Byte> borshData)
     {
         this._buffer = borshData;
