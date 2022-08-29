@@ -1,5 +1,9 @@
 namespace Hexarc.Borsh.Serialization;
 
+/// <summary>
+/// Converts an object or value to or from BORSH.
+/// </summary>
+/// <typeparam name="T">The <see cref="Type"/> to convert.</typeparam>
 public abstract class BorshConverter<T> : BorshConverter
 {
     internal override Type TypeToConvert { get; } = typeof(T);

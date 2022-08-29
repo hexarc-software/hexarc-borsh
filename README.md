@@ -123,6 +123,22 @@ var raw = BorshSerializer.Serialize(Option<String>.Create(input));
 var restored = BorshSerializer.Deserialize<Option<String>>(raw);
 ```
 
+### Fixed array type serialization
+The `BorshFixedArray` attribute allows to serialize fixed array types according 
+to the BORSH specification:
+```cs
+[BorshObject]
+public class Data
+{
+    [BorshPropertyOrder(0)]
+    [BorshFixedArray(3)]
+    public Int32[] Numbers { get; init; } = default!;
+}
+
+var data = new Data { Numbers = new[] { 1, 2, 3 } };
+var raw = BorshSerializer.Serialize(data);
+```
+
 ### Union Serialization
 The `BorshUnion` attribute allows to serialize union types:
 ```cs

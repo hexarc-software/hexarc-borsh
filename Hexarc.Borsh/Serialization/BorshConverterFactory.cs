@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization;
 
+/// <summary>
+/// The base class of all BORSH converter factories.
+/// </summary>
 public abstract class BorshConverterFactory : BorshConverter
 {
     /// <summary>

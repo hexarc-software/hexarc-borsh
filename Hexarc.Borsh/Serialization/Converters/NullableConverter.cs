@@ -5,6 +5,10 @@ public sealed class NullableConverter<T> : BorshConverter<T?>
 {
     private readonly BorshConverter<T> _underlyingConverter;
 
+    /// <summary>
+    /// Creates an instance of the <see cref="NullableConverter{T}"/> class.
+    /// </summary>
+    /// <param name="underlyingConverter"></param>
     public NullableConverter(BorshConverter<T> underlyingConverter) =>
         this._underlyingConverter = underlyingConverter;
 

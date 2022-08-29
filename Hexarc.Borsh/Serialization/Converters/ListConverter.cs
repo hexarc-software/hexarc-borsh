@@ -1,9 +1,17 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for the <see cref="List{T}"/> class.
+/// </summary>
+/// <typeparam name="T">The element type of a serializable list.</typeparam>
 public sealed class ListConverter<T> : BorshConverter<List<T>>
 {
     private readonly BorshConverter<T> _itemConverter;
 
+    /// <summary>
+    /// Creates an instance of the <see cref="ListConverter{T}"/> class.
+    /// </summary>
+    /// <param name="options">The serialization options.</param>
     public ListConverter(BorshSerializerOptions options) =>
         this._itemConverter = options.GetConverter<T>();
 

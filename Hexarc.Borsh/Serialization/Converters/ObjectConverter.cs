@@ -2,6 +2,10 @@ using System.Reflection;
 
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for user defined types like classes or structures.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public sealed class ObjectConverter<T> : BorshConverter<T> where T : notnull
 {
     private readonly TypeAccessor _accessor;
@@ -12,6 +16,10 @@ public sealed class ObjectConverter<T> : BorshConverter<T> where T : notnull
 
     private readonly Dictionary<String, BorshConverter> _converters;
 
+    /// <summary>
+    /// Creates an instance of the <see cref="ObjectConverter{T}"/> class.
+    /// </summary>
+    /// <param name="options">The serialization options.</param>
     public ObjectConverter(BorshSerializerOptions options)
     {
         var type = typeof(T);
@@ -101,12 +109,17 @@ internal sealed record BorshConstructor(ConstructorInfo ConstructorInfo, String[
     }
 }
 
-internal sealed record BorshObjectProperty(Type Type, String Name, Int32 Order, Boolean IsOptional)
+internal sealed record BorshObjectProperty(Type Type, String Name, Int32 Order, Boolean IsOptional, Int32? ArrayLength)
 {
+    private static readonly Type s_indirectOptionConverterType = typeof(IndirectOptionConverter<>);
+
+    private static readonly Type s_indirectFixedArrayConverterType = typeof(IndirectFixedArrayConverter<>); 
+    
     public static BorshObjectProperty Create(PropertyInfo propertyInfo)
     {
         var optionalAttr = propertyInfo.GetCustomAttribute<BorshOptionalAttribute>();
         var orderAttr = propertyInfo.GetCustomAttribute<BorshPropertyOrderAttribute>();
+        var fixedArrayAttr = propertyInfo.GetCustomAttribute<BorshFixedArrayAttribute>();
 
         var type = propertyInfo.PropertyType;
         var name = propertyInfo.Name;
@@ -116,22 +129,33 @@ internal sealed record BorshObjectProperty(Type Type, String Name, Int32 Order, 
             null => throw new InvalidOperationException("Property must be annotated with the BorshPropertyOrder attribute")
         };
         var isOptional = optionalAttr is not null;
+        var arrayLength = fixedArrayAttr?.Length;
 
-        return new BorshObjectProperty(type, name, order, isOptional);
+        return new BorshObjectProperty(type, name, order, isOptional, arrayLength);
     }
 
     public BorshConverter ComputeConverter(BorshSerializerOptions options)
      {
+         var fixedArrayConverter = this.ComputeFixedArrayConverter(options);
+         
          if (this.IsOptional)
          {
-             var baseConverterType = typeof(IndirectOptionConverter<>);
-             var concreteConverterType = baseConverterType.MakeGenericType(this.Type);
-             return Activator.CreateInstance(concreteConverterType) as BorshConverter ??
+             var concreteConverterType = s_indirectOptionConverterType.MakeGenericType(this.Type);
+             return Activator.CreateInstance(concreteConverterType, options, fixedArrayConverter) as BorshConverter ??
                     throw new InvalidOperationException();
          }
          else
          {
-             return options.GetConverter(this.Type);
+             return fixedArrayConverter ?? options.GetConverter(this.Type);
          }
      }
+
+    private BorshConverter? ComputeFixedArrayConverter(BorshSerializerOptions options)
+    {
+        if (this.ArrayLength is null) return default;
+
+        var itemType = this.Type.GetElementType() ?? throw new InvalidOperationException("Property is not an array");
+        var indirectFixedArrayConverterType = s_indirectFixedArrayConverterType.MakeGenericType(itemType);
+        return Activator.CreateInstance(indirectFixedArrayConverterType, options, this.ArrayLength.Value) as BorshConverter;
+    }
 }

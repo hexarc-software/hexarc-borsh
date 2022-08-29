@@ -1,7 +1,7 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
 /// <summary>
-/// Provides serialization for arrays of a specified type.
+/// Provides serialization for arrays of a specific type.
 /// </summary>
 public sealed class ArrayConverter<T> : BorshConverter<T[]>
 {
