@@ -1,4 +1,4 @@
-# Hexarc Borsh
+# Borsh in .NET
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://badges.mit-license.org) 
 [![NuGet](https://img.shields.io/nuget/v/Hexarc.Borsh.svg)](https://www.nuget.org/packages/Hexarc.Borsh)
 [![Downloads](http://img.shields.io/nuget/dt/Hexarc.Borsh.svg)](https://www.nuget.org/packages/Hexarc.Borsh)
