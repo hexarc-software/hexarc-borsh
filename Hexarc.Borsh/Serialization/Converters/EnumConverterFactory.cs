@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different enum types. 
+/// </summary>
 public sealed class EnumConverterFactory : BorshConverterFactory
 {
     private static readonly Type s_enumConverterType = typeof(EnumConverter<>);

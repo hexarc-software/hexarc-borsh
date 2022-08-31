@@ -1,9 +1,17 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for the <see cref="HashSet{T}"/> class.
+/// </summary>
+/// <typeparam name="T">The value type of serializable hash sets.</typeparam>
 public sealed class HashSetConverter<T> : BorshConverter<HashSet<T>>
 {
     private readonly BorshConverter<T> _itemConverter;
 
+    /// <summary>
+    /// Creates an instance of the <see cref="HashSetConverter{T}"/> class.
+    /// </summary>
+    /// <param name="options">The serialization options.</param>
     public HashSetConverter(BorshSerializerOptions options) =>
         this._itemConverter = options.GetConverter<T>();
 

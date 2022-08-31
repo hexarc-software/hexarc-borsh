@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="Boolean"/> primitives.
+/// </summary>
 public sealed class BooleanConverter : BorshConverter<Boolean>
 {
     /// <inheritdoc />

@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different <see cref="Nullable{T}"/> types. 
+/// </summary>
 public sealed class NullableConverterFactory : BorshConverterFactory
 {
     private static readonly Type s_nullableType = typeof(Nullable<>);

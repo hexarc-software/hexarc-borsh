@@ -2,6 +2,9 @@ using System.Reflection;
 
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different union types. 
+/// </summary>
 public sealed class UnionConverterFactory : BorshConverterFactory
 {
     private static readonly Type s_unionConverter = typeof(UnionConverter<>);

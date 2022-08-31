@@ -1,5 +1,10 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for the <see cref="Dictionary{TKey,TValue}"/> class.
+/// </summary>
+/// <typeparam name="TKey">The key type of serializable dictionaries.</typeparam>
+/// <typeparam name="TValue">The value type of serializable dictionaries.</typeparam>
 public sealed class DictionaryConverter<TKey, TValue> : BorshConverter<Dictionary<TKey, TValue>>
     where TKey : notnull
 {
@@ -7,6 +12,10 @@ public sealed class DictionaryConverter<TKey, TValue> : BorshConverter<Dictionar
 
     private readonly BorshConverter<TValue> _valueConverter;
 
+    /// <summary>
+    /// Creates an instance of the <see cref="DictionaryConverter{TKey,TValue}"/> class.
+    /// </summary>
+    /// <param name="options">The serialization options.</param>
     public DictionaryConverter(BorshSerializerOptions options)
     {
         this._keyConverter = options.GetConverter<TKey>();

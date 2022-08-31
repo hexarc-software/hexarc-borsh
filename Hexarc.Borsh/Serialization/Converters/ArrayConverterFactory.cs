@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for array types. 
+/// </summary>
 public sealed class ArrayConverterFactory : BorshConverterFactory
 {
     private static readonly Type s_arrayConverterType = typeof(ArrayConverter<>);

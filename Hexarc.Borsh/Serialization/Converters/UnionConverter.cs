@@ -2,11 +2,20 @@ using System.Reflection;
 
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="UnionConverter{T}"/> objects.
+/// </summary>
+/// <typeparam name="T">The union annotated type for serialization.</typeparam>
 public sealed class UnionConverter<T> : BorshConverter<T> where T : class
 {
     private readonly Dictionary<Type, Byte> _caseTypeOrders;
     private readonly Dictionary<Byte, BorshConverter> _caseConverters;
 
+    /// <summary>
+    /// Creates an instance of the <see cref="UnionConverter{T}"/> class.
+    /// </summary>
+    /// <param name="options">The serialization options.</param>
+    /// <exception cref="InvalidOperationException">Throws if the provided type is misconfigured.</exception>
     public UnionConverter(BorshSerializerOptions options)
     {
         var type = typeof(T);

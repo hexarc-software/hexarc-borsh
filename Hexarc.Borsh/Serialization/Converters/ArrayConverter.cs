@@ -3,6 +3,7 @@ namespace Hexarc.Borsh.Serialization.Converters;
 /// <summary>
 /// Provides serialization for arrays of a specific type.
 /// </summary>
+/// <typeparam name="T">The element type of serializable arrays.</typeparam>
 public sealed class ArrayConverter<T> : BorshConverter<T[]>
 {
     private readonly BorshConverter<T> _itemConverter;

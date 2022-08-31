@@ -2,6 +2,9 @@ using System.Reflection;
 
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different object types. 
+/// </summary>
 public sealed class ObjectConverterFactory : BorshConverterFactory
 {
     private static readonly Type s_objectConverterType = typeof(ObjectConverter<>);

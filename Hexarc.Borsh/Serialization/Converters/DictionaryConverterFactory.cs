@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different <see cref="Dictionary{TKey,TValue}"/> types. 
+/// </summary>
 public sealed class DictionaryConverterFactory : BorshConverterFactory
 {
     private static readonly Type s_dictionaryType = typeof(Dictionary<,>);

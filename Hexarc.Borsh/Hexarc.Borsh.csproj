@@ -8,10 +8,10 @@
 
   <PropertyGroup>
     <PackageId>Hexarc.Borsh</PackageId>
-    <Version>1.3.0</Version>
+    <Version>1.3.1</Version>
     <Authors>Max Koverdyaev</Authors>
     <Company>Hexarc Software</Company>
-    <PackageTags>Borsh;Serialization;Deserialization;Library;Solana,Near</PackageTags>
+    <PackageTags>Borsh;Serialization;Deserialization;Library;Solana,Near;Hashing;Cryptography</PackageTags>
     <PackageProjectUrl>https://github.com/hexarc-software/hexarc-borsh</PackageProjectUrl>
     <RepositoryUrl>https://github.com/hexarc-software/hexarc-borsh</RepositoryUrl>
     <Description>

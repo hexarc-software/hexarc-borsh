@@ -98,8 +98,7 @@ var raw = BorshSerializer.Serialize(rect);
 ### Nullable reference type serialization
 Another important notice that Borsh is mostly designed to support the Rust
 type system. So `null` reference values are not supported in .NET implementation.
-Please use the special `Hexarc.Borsh.Serialization.BorshOptionalAttribute` attribute or 
-`Hexarc.Borsh.Option<T>` type.
+Please use the special `BorshOptional` attribute or `Hexarc.Borsh.Option<T>` type.
 
 Property annotation example:
 ```cs
@@ -139,7 +138,7 @@ var data = new Data { Numbers = new[] { 1, 2, 3 } };
 var raw = BorshSerializer.Serialize(data);
 ```
 
-### Union Serialization
+### Union type serialization
 The `BorshUnion` attribute allows to serialize union types:
 ```cs
 [BorshUnion(0, typeof(Circle))]

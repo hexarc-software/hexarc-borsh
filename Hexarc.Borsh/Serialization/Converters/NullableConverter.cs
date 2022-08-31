@@ -1,5 +1,9 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for <see cref="Nullable{T}"/> objects.
+/// </summary>
+/// <typeparam name="T">The underlying type of serializable nullable objects.</typeparam>
 public sealed class NullableConverter<T> : BorshConverter<T?>
     where T : struct
 {
@@ -8,7 +12,7 @@ public sealed class NullableConverter<T> : BorshConverter<T?>
     /// <summary>
     /// Creates an instance of the <see cref="NullableConverter{T}"/> class.
     /// </summary>
-    /// <param name="underlyingConverter"></param>
+    /// <param name="underlyingConverter">The converter for the underlying type.</param>
     public NullableConverter(BorshConverter<T> underlyingConverter) =>
         this._underlyingConverter = underlyingConverter;
 

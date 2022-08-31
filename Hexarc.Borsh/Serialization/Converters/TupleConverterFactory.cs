@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different value tuple types. 
+/// </summary>
 public sealed class TupleConverterFactory : BorshConverterFactory
 {
     private static readonly String s_tupleTypeName = typeof(ValueTuple).FullName!;

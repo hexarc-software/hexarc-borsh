@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different <see cref="HashSet{T}"/> types. 
+/// </summary>
 public sealed class HashSetConverterFactory : BorshConverterFactory
 {
     private static readonly Type s_hashSetType = typeof(HashSet<>);

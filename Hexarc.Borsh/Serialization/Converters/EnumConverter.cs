@@ -1,5 +1,9 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Provides serialization for a particular enum.
+/// </summary>
+/// <typeparam name="T">The enum type for serialization.</typeparam>
 public sealed class EnumConverter<T> : BorshConverter<T> where T : struct, Enum
 {
     private readonly T[] _cachedValues = Enum.GetValues<T>();

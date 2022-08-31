@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different option types. 
+/// </summary>
 public sealed class OptionConverterFactory : BorshConverterFactory
 {
     private readonly Type s_optionType = typeof(Option<>);

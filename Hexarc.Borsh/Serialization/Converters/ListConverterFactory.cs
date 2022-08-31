@@ -1,5 +1,8 @@
 namespace Hexarc.Borsh.Serialization.Converters;
 
+/// <summary>
+/// Supports creating converters for different <see cref="List{T}"/> types. 
+/// </summary>
 public sealed class ListConverterFactory : BorshConverterFactory
 {
     private static readonly Type s_listType = typeof(List<>);
