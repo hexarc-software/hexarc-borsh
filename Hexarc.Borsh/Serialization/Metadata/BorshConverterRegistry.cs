@@ -35,9 +35,11 @@ public sealed class BorshConverterRegistry
         converters.AddConverter(BorshMetadataServices.Int16Converter);
         converters.AddConverter(BorshMetadataServices.Int32Converter);
         converters.AddConverter(BorshMetadataServices.Int64Converter);
+        converters.AddConverter(BorshMetadataServices.Int128Converter);
         converters.AddConverter(BorshMetadataServices.UInt16Converter);
         converters.AddConverter(BorshMetadataServices.UInt32Converter);
         converters.AddConverter(BorshMetadataServices.UInt64Converter);
+        converters.AddConverter(BorshMetadataServices.UInt128Converter);
         converters.AddConverter(BorshMetadataServices.HalfConverter);
         converters.AddConverter(BorshMetadataServices.SingleConverter);
         converters.AddConverter(BorshMetadataServices.DoubleConverter);

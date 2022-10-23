@@ -91,6 +91,21 @@ public ref struct BorshReader
     [CLSCompliant(false)]
     public UInt64 ReadUInt64() =>
         ReadUInt64LittleEndian(this.ReadSpan(sizeof(UInt64)));
+    
+    /// <summary>
+    /// Reads a <see cref="Int128"/> value from the buffer.
+    /// </summary>
+    /// <returns>A 128-bit signed integer value.</returns>
+    public Int128 ReadInt128() =>
+        ReadInt128LittleEndian(this.ReadSpan(sizeof(Int128)));
+
+    /// <summary>
+    /// Reads a <see cref="UInt128"/> value from the buffer.
+    /// </summary>
+    /// <returns>A 128-bit unsigned integer value.</returns>
+    [CLSCompliant(false)]
+    public UInt128 ReadUInt128() =>
+        ReadUInt128LittleEndian(this.ReadSpan(sizeof(UInt128)));
 
     /// <summary>
     /// Reads a <see cref="Half"/> value from the buffer.

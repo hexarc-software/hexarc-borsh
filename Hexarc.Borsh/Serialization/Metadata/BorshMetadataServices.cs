@@ -43,6 +43,12 @@ public static class BorshMetadataServices
     /// </summary>
     public static BorshConverter<Int64> Int64Converter => _int64Converter ??= new Int64Converter();
     private static BorshConverter<Int64>? _int64Converter;
+    
+    /// <summary>
+    /// Gets the BORSH converter for the <see cref="Int128"/> type.
+    /// </summary>
+    public static BorshConverter<Int128> Int128Converter => _int128Converter ??= new Int128Converter();
+    private static BorshConverter<Int128>? _int128Converter;
 
     /// <summary>
     /// Gets the BORSH converter for the <see cref="UInt16"/> type.
@@ -64,6 +70,13 @@ public static class BorshMetadataServices
     [CLSCompliant(false)]
     public static BorshConverter<UInt64> UInt64Converter => _uint64Converter ??= new UInt64Converter();
     private static BorshConverter<UInt64>? _uint64Converter;
+    
+    /// <summary>
+    /// Gets the BORSH converter for the <see cref="UInt128"/> type.
+    /// </summary>
+    [CLSCompliant(false)]
+    public static BorshConverter<UInt128> UInt128Converter => _uint128Converter ??= new UInt128Converter();
+    private static BorshConverter<UInt128>? _uint128Converter;
 
     /// <summary>
     /// Gets the BORSH converter for the <see cref="Half"/> type.
