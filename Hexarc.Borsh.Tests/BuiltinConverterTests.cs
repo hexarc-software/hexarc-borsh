@@ -114,6 +114,17 @@ public class BuiltinConverterTests
         var output = buffer.WrittenMemory.ToArray();
         Assert.AreEqual(target, output);
     }
+    
+    [TestCase(32u, 32u, new Byte[] { 32, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0 })]
+    public void Int128_WriteValue_ShouldNotFail(UInt32 upper, UInt32 lower, Byte[] target)
+    {
+        var source = new Int128(upper, lower);
+        var buffer = new ArrayBufferWriter<Byte>();
+        var writer = new BorshWriter(buffer);
+        BorshMetadataServices.Int128Converter.Write(writer, source, new BorshSerializerOptions());
+        var output = buffer.WrittenMemory.ToArray();
+        Assert.AreEqual(target, output);
+    }
 
     [TestCase(Single.PositiveInfinity, new Byte[] { 0, 0, 128, 127 })]
     [TestCase(1.1f, new Byte[] { 205, 204, 140, 63 })]

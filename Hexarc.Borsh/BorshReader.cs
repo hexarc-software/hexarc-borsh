@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using Hexarc.Borsh.Serialization;
 using static System.Buffers.Binary.BinaryPrimitives;
+using static Hexarc.Borsh.BinaryPrimitivesExt;
 
 namespace Hexarc.Borsh;
 
@@ -97,7 +98,7 @@ public ref struct BorshReader
     /// </summary>
     /// <returns>A 128-bit signed integer value.</returns>
     public Int128 ReadInt128() =>
-        ReadInt128LittleEndian(this.ReadSpan(sizeof(Int128)));
+        ReadInt128LittleEndian(this.ReadSpan(16));
 
     /// <summary>
     /// Reads a <see cref="UInt128"/> value from the buffer.
@@ -105,7 +106,7 @@ public ref struct BorshReader
     /// <returns>A 128-bit unsigned integer value.</returns>
     [CLSCompliant(false)]
     public UInt128 ReadUInt128() =>
-        ReadUInt128LittleEndian(this.ReadSpan(sizeof(UInt128)));
+        ReadUInt128LittleEndian(this.ReadSpan(16));
 
     /// <summary>
     /// Reads a <see cref="Half"/> value from the buffer.

@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using Hexarc.Borsh.Serialization;
 using static System.Buffers.Binary.BinaryPrimitives;
+using static Hexarc.Borsh.BinaryPrimitivesExt;
 
 namespace Hexarc.Borsh;
 
@@ -83,14 +84,14 @@ public sealed class BorshWriter
     /// <param name="value">The 128-bit unsigned integer value to write.</param>
     [CLSCompliant(false)]
     public void WriteUInt128(UInt128 value) =>
-        WriteUInt128LittleEndian(this.AllocateSpan(sizeof(UInt128)), value);
+        WriteUInt128LittleEndian(this.AllocateSpan(16), value);
     
     /// <summary>
     /// Writes a <see cref="Int128"/> value into the buffer.
     /// </summary>
     /// <param name="value">The 128-bit signed integer value to write.</param>
     public void WriteInt128(Int128 value) =>
-        WriteInt128LittleEndian(this.AllocateSpan(sizeof(Int128)), value);
+        WriteInt128LittleEndian(this.AllocateSpan(16), value);
 
     /// <summary>
     /// Writes a <see cref="UInt64"/> value into the buffer.
