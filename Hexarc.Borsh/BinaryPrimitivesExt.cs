@@ -58,9 +58,11 @@ internal static class BinaryPrimitivesExt
                 MemoryMarshal.Read<UInt64>(source[8..]))
             : MemoryMarshal.Read<Int128>(source);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Int128 ReverseEndiannessInt128(UInt64 lower, UInt64 upper) =>
         new(BinaryPrimitives.ReverseEndianness(lower), BinaryPrimitives.ReverseEndianness(upper));
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static UInt128 ReverseEndiannessUInt128(UInt64 lower, UInt64 upper) =>
         new(BinaryPrimitives.ReverseEndianness(lower), BinaryPrimitives.ReverseEndianness(upper));
 }

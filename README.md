@@ -5,10 +5,16 @@
 
 Hexarc.Borsh is .NET implementation of the [Binary Object Representation Serializer for Hashing](https://borsh.io/) format.
 
-### Features:
+## Features:
 * 100% C# library
 * Zero dependencies
 * Ready for Blazor WebAssembly
+
+## Supported platforms
+| .NET  | Hexarc.Borsh |
+|-------|--------------|
+| `6.x` | `1.x`        |
+| `7.x` | `2.x`        |
 
 ## Getting started
 
@@ -45,7 +51,7 @@ var restored = BorshSerializer.Deserialize<Point>(raw);
 
 ## Features
 These types can be serialized by default:
-* `Byte`, `SByte`, `Boolean`, `Int16`, `UInt16`, `Int32`, `UInt32`, `Int64`, `UInt64`
+* `Byte`, `SByte`, `Boolean`, `Int16`, `UInt16`, `Int32`, `UInt32`, `Int64`, `UInt64`, `Int128`, `UInt128`
 * `Single`, `Double`, `Half`
 * `Nullable<T>`
 * `Enum`
