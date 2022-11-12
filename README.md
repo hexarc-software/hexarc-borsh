@@ -5,7 +5,7 @@
 
 Hexarc.Borsh is .NET implementation of the [Binary Object Representation Serializer for Hashing](https://borsh.io/) format.
 
-## Features:
+## Features
 * 100% C# library
 * Zero dependencies
 * Ready for Blazor WebAssembly
