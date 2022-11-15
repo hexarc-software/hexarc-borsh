@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class DictionarySerializationTests
+public sealed class DictionarySerializationTests
 {
     [TestCaseSource(nameof(Cases))]
     public void DictionarySerialization_ShouldMatchExpectation(Dictionary<Int32, Int32> dictionary, Byte[] expected)
@@ -28,7 +28,7 @@ public class DictionarySerializationTests
         },
         new Object[]
         {
-            new Dictionary<Int32, Int32>()
+            new Dictionary<Int32, Int32>
             {
                 { 1, 1 }
             },

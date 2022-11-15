@@ -1,10 +1,10 @@
-using Hexarc.Borsh.Serialization;
 using NUnit.Framework;
+using Hexarc.Borsh.Serialization;
 
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class OptionSerializationTests
+public sealed class OptionSerializationTests
 {
     [TestCaseSource(nameof(StringCases))]
     public void OptionStringSerialization_ShouldMatchExpectation(Option<String> value, Byte[] expected)

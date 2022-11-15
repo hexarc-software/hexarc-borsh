@@ -5,7 +5,7 @@ using Hexarc.Borsh.Serialization.Metadata;
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class BuiltinConverterTests
+public sealed class BuiltinConverterTests
 {
     [TestCase("", new Byte[] { 0, 0, 0, 0 })]
     [TestCase("Test", new Byte[] { 4, 0, 0, 0, 84, 101, 115, 116 })]

@@ -1,10 +1,10 @@
-using Hexarc.Borsh.Serialization;
 using NUnit.Framework;
+using Hexarc.Borsh.Serialization;
 
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class UnionSerializationTests
+public sealed class UnionSerializationTests
 {
     [Test]
     public void UnionSerialization_ShouldMatchExpectation()
@@ -23,22 +23,22 @@ public class UnionSerializationTests
         Assert.IsTrue(restored is Square { SideSize: 1 });
     }
 
+    [BorshObject]
     [BorshUnion(0, typeof(Circle))]
     [BorshUnion(1, typeof(Square))]
-    [BorshObject]
     public abstract class Figure {}
 
     [BorshObject]
     public sealed class Circle : Figure
     {
         [BorshPropertyOrder(1)]
-        public Int32 Radius { get; init; }
+        public required Int32 Radius { get; init; }
     }
 
     [BorshObject]
     public sealed class Square : Figure
     {
         [BorshPropertyOrder(0)]
-        public Int32 SideSize { get; init; }
+        public required Int32 SideSize { get; init; }
     }
 }

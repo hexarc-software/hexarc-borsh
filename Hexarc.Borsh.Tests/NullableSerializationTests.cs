@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class NullableSerializationTests
+public sealed class NullableSerializationTests
 {
     [TestCase(null, new Byte[] { 0 })]
     [TestCase(1, new Byte[] { 1, 1, 0, 0, 0 })]

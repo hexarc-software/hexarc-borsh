@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class EnumSerializationTests
+public sealed class EnumSerializationTests
 {
     public enum Numbers
     {

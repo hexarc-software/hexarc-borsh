@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Hexarc.Borsh.Tests;
 
-public class SerializerTests
+public sealed class SerializerTests
 {
     [TestCase(1, new Byte[] { 1 })]
     public void SerializeByte_ShouldMatchExpectation(Byte value, Byte[] expected)

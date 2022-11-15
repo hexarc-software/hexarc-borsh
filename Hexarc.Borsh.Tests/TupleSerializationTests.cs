@@ -28,7 +28,6 @@ public class TupleSerializationTests
     {
         var value = new Byte[15 * 4];
         var expected = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-
         var result = BorshSerializer.Deserialize<(Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32)>(value);
         Assert.AreEqual(expected, result);
     }

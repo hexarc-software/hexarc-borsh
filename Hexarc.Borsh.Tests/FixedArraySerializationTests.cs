@@ -1,10 +1,10 @@
-using Hexarc.Borsh.Serialization;
 using NUnit.Framework;
+using Hexarc.Borsh.Serialization;
 
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class FixedArraySerializationTests
+public sealed class FixedArraySerializationTests
 {
     [TestCaseSource(nameof(TestData))]
     public void FixedArraySerialization_ShouldMatchExpectation(Data value, Byte[] expected)
@@ -35,11 +35,11 @@ public class FixedArraySerializationTests
     };
     
     [BorshObject]
-    public class Data
+    public sealed class Data
     {
         [BorshPropertyOrder(0)]
         [BorshFixedArray(3)]
-        public Int32[] Numbers { get; init; } = default!;
+        public required Int32[] Numbers { get; init; }
         
         [BorshPropertyOrder(1)]
         [BorshOptional]

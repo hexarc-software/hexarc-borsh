@@ -1,11 +1,11 @@
 using System.Buffers;
-using Hexarc.Borsh.Serialization.Converters;
 using NUnit.Framework;
+using Hexarc.Borsh.Serialization.Converters;
 
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class EnumConverterTests
+public sealed class EnumConverterTests
 {
     public enum TestEnum
     {

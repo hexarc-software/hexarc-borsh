@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Hexarc.Borsh.Tests;
 
-public class PrimitiveTests
+public sealed class PrimitiveTests
 {
     [Test]
     public void ToBytes()

@@ -1,10 +1,10 @@
-using Hexarc.Borsh.Serialization;
 using NUnit.Framework;
+using Hexarc.Borsh.Serialization;
 
 namespace Hexarc.Borsh.Tests;
 
 [TestFixture]
-public class ClassSerializationTests
+public sealed class ClassSerializationTests
 {
     [TestCaseSource(nameof(SerializePointCases))]
     public void SerializePoint_ShouldMatchExpectation(Point point, Byte[] expected)
