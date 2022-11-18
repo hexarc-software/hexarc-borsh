@@ -34,13 +34,13 @@ Serialize and deserialize .NET objects via the `BorshSerializer` class:
 public class Point
 {
     [BorshPropertyOrder(0)]
-    public Int32 X { get; init; }
+    public required Int32 X { get; init; }
     
     [BorshPropertyOrder(1)]
-    public Int32 Y { get; init; }
+    public required Int32 Y { get; init; }
     
     [BorshPropertyOrder(2)]
-    public Int32 Z { get; init; }
+    public required Int32 Z { get; init; }
 }
 
 var point = new Point() { X = 5, Y = 10, Z = 20 };
