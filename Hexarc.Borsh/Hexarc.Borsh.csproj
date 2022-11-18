@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Hexarc.Borsh</PackageId>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Authors>Max Koverdyaev</Authors>
     <Company>Hexarc Software</Company>
     <PackageTags>Borsh;Serialization;Deserialization;Library;Solana,Near;Hashing;Cryptography</PackageTags>

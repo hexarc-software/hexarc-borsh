@@ -77,13 +77,13 @@ public sealed class ClassSerializationTests
     public sealed class Point : IEquatable<Point>
     {
         [BorshPropertyOrder(0)]
-        public Single X { get; init; }
+        public required Single X { get; init; }
 
         [BorshPropertyOrder(1)]
-        public Single Y { get; init; }
+        public required Single Y { get; init; }
 
         [BorshPropertyOrder(2)]
-        public Single Z { get; init; }
+        public required Single Z { get; init; }
 
         [BorshIgnore]
         public String? Memo { get; init; }

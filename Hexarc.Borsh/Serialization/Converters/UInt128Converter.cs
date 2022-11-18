@@ -3,6 +3,7 @@ namespace Hexarc.Borsh.Serialization.Converters;
 /// <summary>
 /// Provides serialization for <see cref="UInt128"/> primitives.
 /// </summary>
+[CLSCompliant(false)]
 public sealed class UInt128Converter : BorshConverter<UInt128>
 {
     /// <inheritdoc />

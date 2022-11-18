@@ -73,13 +73,13 @@ The `BorshIgnore` attribute can be used to exclude properties from serialization
 public class Point
 {
     [BorshPropertyOrder(0)]
-    public Int32 X { get; init; }
+    public required Int32 X { get; init; }
     
     [BorshPropertyOrder(1)]
-    public Int32 Y { get; init; }
+    public required Int32 Y { get; init; }
     
     [BorshPropertyOrder(2)]
-    public Int32 Z { get; init; }
+    public required Int32 Z { get; init; }
     
     // This property will be exluded from serialization.
     [BorshIgnore]
@@ -137,7 +137,7 @@ public class Data
 {
     [BorshPropertyOrder(0)]
     [BorshFixedArray(3)]
-    public Int32[] Numbers { get; init; } = default!;
+    public required Int32[] Numbers { get; init; }
 }
 
 var data = new Data { Numbers = new[] { 1, 2, 3 } };
@@ -156,14 +156,14 @@ public abstract class Figure {}
 public sealed class Circle : Figure
 {
     [BorshPropertyOrder(0)]
-    public Int32 Radius { get; init; }
+    public required Int32 Radius { get; init; }
 }
 
 [BorshObject]
 public sealed class Square : Figure
 {
     [BorshPropertyOrder(0)]
-    public Int32 SideSize { get; init; }
+    public required Int32 SideSize { get; init; }
 }
 
 Figure square = new Square { SideSize = 1 };

@@ -40,6 +40,7 @@ public sealed class UnionConverter<T> : BorshConverter<T> where T : class
     public override T Read(ref BorshReader reader, BorshSerializerOptions options)
     {
         var key = reader.ReadByte();
-        return this._caseConverters[key].ReadCoreAsObject(ref reader, options) as T ?? throw new InvalidOperationException();
+        return this._caseConverters[key].ReadCoreAsObject(ref reader, options) as T ??
+               throw new InvalidOperationException();
     }
 }
