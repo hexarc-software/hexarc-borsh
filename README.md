@@ -31,7 +31,7 @@ using Hexarc.Borsh;
 Serialize and deserialize .NET objects via the `BorshSerializer` class:
 ```cs
 [BorshObject]
-public class Point
+public sealed class Point
 {
     [BorshPropertyOrder(0)]
     public required Int32 X { get; init; }
@@ -43,13 +43,13 @@ public class Point
     public required Int32 Z { get; init; }
 }
 
-var point = new Point() { X = 5, Y = 10, Z = 20 };
+var point = new Point { X = 5, Y = 10, Z = 20 };
 
 var raw = BorshSerializer.Serialize(point);
 var restored = BorshSerializer.Deserialize<Point>(raw);
 ```
 
-## Features
+## Serialization capabilities
 These types can be serialized by default:
 * `Byte`, `SByte`, `Boolean`, `Int16`, `UInt16`, `Int32`, `UInt32`, `Int64`, `UInt64`, `Int128`, `UInt128`
 * `Single`, `Double`, `Half`
@@ -70,7 +70,7 @@ Serializable types must be annotated with the `BorshObject` attribute.
 The `BorshIgnore` attribute can be used to exclude properties from serialization.
 ```cs
 [BorshObject]
-public class Point
+public sealed class Point
 {
     [BorshPropertyOrder(0)]
     public required Int32 X { get; init; }
@@ -81,7 +81,7 @@ public class Point
     [BorshPropertyOrder(2)]
     public required Int32 Z { get; init; }
     
-    // This property will be exluded from serialization.
+    // This property will be excluded from serialization.
     [BorshIgnore]
     public String? Memo { get; init; }
 }
@@ -103,13 +103,13 @@ var raw = BorshSerializer.Serialize(rect);
 
 ### Nullable reference type serialization
 Another important notice that Borsh is mostly designed to support the Rust
-type system. So `null` reference values are not supported in .NET implementation.
-Please use the special `BorshOptional` attribute or `Hexarc.Borsh.Option<T>` type.
+type system. So `null` reference values are not directly supported in .NET implementation.
+Please use the special `BorshOptional` attribute or `Hexarc.Borsh.Option<T>` type for this purpose.
 
 Property annotation example:
 ```cs
 [BorshObject]
-public class PersonDetails
+public sealed class PersonDetails
 {
     [BorshPropertyOrder(0)]
     [BorshOptional]
@@ -130,7 +130,7 @@ var restored = BorshSerializer.Deserialize<Option<String>>(raw);
 
 ### Fixed array type serialization
 The `BorshFixedArray` attribute allows to serialize fixed array types according 
-to the BORSH specification:
+to the Borsh specification:
 ```cs
 [BorshObject]
 public class Data
