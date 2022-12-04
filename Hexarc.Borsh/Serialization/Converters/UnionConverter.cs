@@ -19,7 +19,7 @@ public sealed class UnionConverter<T> : BorshConverter<T> where T : class
     public UnionConverter(BorshSerializerOptions options)
     {
         var type = typeof(T);
-        this._caseTypeOrders = type.GetCustomAttributes<BorshUnionAttribute>()
+        this._caseTypeOrders = type.GetCustomAttributes<BorshUnionBaseAttribute>(false)
             .ToDictionary(x => x.CaseType, x => x.Order);
         this._caseConverters = this._caseTypeOrders
             .ToDictionary(

@@ -133,7 +133,7 @@ The `BorshFixedArray` attribute allows to serialize fixed array types according
 to the Borsh specification:
 ```cs
 [BorshObject]
-public class Data
+public sealed class Data
 {
     [BorshPropertyOrder(0)]
     [BorshFixedArray(3)]
@@ -147,9 +147,9 @@ var raw = BorshSerializer.Serialize(data);
 ### Union type serialization
 The `BorshUnion` attribute allows to serialize union types:
 ```cs
-[BorshUnion(0, typeof(Circle))]
-[BorshUnion(1, typeof(Square))]
 [BorshObject]
+[BorshUnion<Circle>(0)]
+[BorshUnion<Square>(1)]
 public abstract class Figure {}
 
 [BorshObject]

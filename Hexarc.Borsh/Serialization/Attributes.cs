@@ -78,10 +78,9 @@ internal class BorshConverterAttribute : BorshAttribute
 }
 
 /// <summary>
-/// Allows to specify a case for a union type. 
+/// The base class for BORSH union case attributes.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)]
-public sealed class BorshUnionAttribute : BorshAttribute
+public abstract class BorshUnionBaseAttribute : BorshAttribute
 {
     /// <summary>
     /// Gets the serialization order of the provided case.
@@ -92,15 +91,37 @@ public sealed class BorshUnionAttribute : BorshAttribute
     /// Gets the type of the provided case.
     /// </summary>
     public Type CaseType { get; }
+    
+    internal BorshUnionBaseAttribute(Byte order, Type caseType)
+    {
+        this.Order = order;
+        this.CaseType = caseType;
+    }
+}
 
+/// <summary>
+/// Allows to specify a case for a union type. 
+/// </summary>
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)]
+public sealed class BorshUnionAttribute : BorshUnionBaseAttribute
+{
     /// <summary>
     /// Creates an instance of the <see cref="BorshUnionAttribute"/> class.
     /// </summary>
     /// <param name="order">The serialization order of a provided case.</param>
     /// <param name="caseType">The type of a provided case.</param>
-    public BorshUnionAttribute(Byte order, Type caseType)
-    {
-        this.Order = order;
-        this.CaseType = caseType;
-    }
+    public BorshUnionAttribute(Byte order, Type caseType) : base(order, caseType) { }
+}
+
+/// <summary>
+/// Allows to specify a case for a union type via the generic syntax. 
+/// </summary>
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)]
+public sealed class BorshUnionAttribute<T> : BorshUnionBaseAttribute
+{
+    /// <summary>
+    /// Creates an instance of the <see cref="BorshUnionAttribute{T}"/> class.
+    /// </summary>
+    /// <param name="order">The serialization order of a provided case.</param>
+    public BorshUnionAttribute(Byte order) : base(order, typeof(T)) { }
 }

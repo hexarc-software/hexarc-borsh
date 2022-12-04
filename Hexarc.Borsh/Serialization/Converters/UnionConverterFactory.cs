@@ -12,9 +12,9 @@ public sealed class UnionConverterFactory : BorshConverterFactory
     /// <inheritdoc />
     public override Boolean CanConvert(Type type) =>
         type.IsInterface
-            ? type.GetCustomAttributes<BorshUnionAttribute>(false).Any()
+            ? type.GetCustomAttributes<BorshUnionBaseAttribute>(false).Any()
             : type.GetCustomAttribute<BorshObjectAttribute>() is not null &&
-              type.GetCustomAttributes<BorshUnionAttribute>(false).Any();
+              type.GetCustomAttributes<BorshUnionBaseAttribute>(false).Any();
 
     /// <inheritdoc />
     public override BorshConverter CreateConverter(Type type, BorshSerializerOptions options)

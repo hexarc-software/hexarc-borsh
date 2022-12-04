@@ -7,7 +7,7 @@ namespace Hexarc.Borsh.Tests;
 public sealed class UnionSerializationTests
 {
     [Test]
-    public void UnionSerialization_ShouldMatchExpectation()
+    public void GenericUnionSerialization_ShouldMatchExpectation()
     {
         Figure square = new Square { SideSize = 1 };
         var expected = new Byte[] { 1, 1, 0, 0, 0 };
@@ -16,29 +16,57 @@ public sealed class UnionSerializationTests
     }
 
     [Test]
-    public void UnionDeserialization_ShouldMatchExpectation()
+    public void GenericUnionDeserialization_ShouldMatchExpectation()
     {
         var raw = new Byte[] { 1, 1, 0, 0, 0 };
         var restored = BorshSerializer.Deserialize<Figure>(raw);
         Assert.IsTrue(restored is Square { SideSize: 1 });
     }
-
-    [BorshObject]
-    [BorshUnion(0, typeof(Circle))]
-    [BorshUnion(1, typeof(Square))]
-    public abstract class Figure {}
-
-    [BorshObject]
-    public sealed class Circle : Figure
+    
+    [Test]
+    public void UnionSerialization_ShouldMatchExpectation()
     {
-        [BorshPropertyOrder(1)]
+        Animal square = new Dog();
+        var expected = new Byte[] { 0 };
+        var raw = BorshSerializer.Serialize(square);
+        Assert.AreEqual(expected, raw);
+    }
+
+    [Test]
+    public void UnionDeserialization_ShouldMatchExpectation()
+    {
+        var raw = new Byte[] { 1 };
+        var restored = BorshSerializer.Deserialize<Animal>(raw);
+        Assert.IsTrue(restored is Cat);
+    }
+
+    [BorshObject]
+    [BorshUnion<Circle>(0)]
+    [BorshUnion<Square>(1)]
+    private abstract class Figure {}
+
+    [BorshObject]
+    private sealed class Circle : Figure
+    {
+        [BorshPropertyOrder(0)]
         public required Int32 Radius { get; init; }
     }
 
     [BorshObject]
-    public sealed class Square : Figure
+    private sealed class Square : Figure
     {
         [BorshPropertyOrder(0)]
         public required Int32 SideSize { get; init; }
     }
+    
+    [BorshObject]
+    [BorshUnion(0, typeof(Dog))]
+    [BorshUnion(1, typeof(Cat))]
+    private abstract class Animal {}
+
+    [BorshObject]
+    private sealed class Dog : Animal { }
+
+    [BorshObject]
+    private sealed class Cat : Animal { }
 }
