@@ -2,6 +2,7 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://badges.mit-license.org) 
 [![NuGet](https://img.shields.io/nuget/v/Hexarc.Borsh.svg)](https://www.nuget.org/packages/Hexarc.Borsh)
 [![Downloads](http://img.shields.io/nuget/dt/Hexarc.Borsh.svg)](https://www.nuget.org/packages/Hexarc.Borsh)
+[![Donate Solana](https://img.shields.io/static/v1?label=Fondify.app&message=Donate%20%24SOL&color=blueviolet)](https://fondify.app/to/9qjvN4GZf78M2JsLUxXUNQWnDo96s12Zzzkzoo8cFpqw)
 
 Hexarc.Borsh is .NET implementation of the [Binary Object Representation Serializer for Hashing](https://borsh.io/) format.
 
